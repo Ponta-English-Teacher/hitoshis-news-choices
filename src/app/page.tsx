@@ -6,10 +6,10 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <h1 className={styles.title}>This Week</h1>
+        <h1 className={styles.title}>Hitoshi’s News Choices</h1>
+        <p className={styles.dateRange}>August 25 – September 2, 2026</p>
         <p className={styles.subtitle}>
-          A small selection of meaningful stories chosen for English
-          learning.
+          Meaningful stories selected for English learning.
         </p>
       </header>
 

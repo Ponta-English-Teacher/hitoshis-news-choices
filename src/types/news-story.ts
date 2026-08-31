@@ -24,6 +24,22 @@ export type RightsStatus =
   | "copyrighted"
   | "unclear-rights";
 
+export interface ReadingSupportVocabularyItem {
+  term: string;
+  meaning: string;
+}
+
+/**
+ * In-app "prepare before you read" content for an Authentic Reading story.
+ * Optional: only stories with a built support page carry this; others keep
+ * the direct-to-publisher card behavior.
+ */
+export interface ReadingSupport {
+  background: string;
+  vocabulary: ReadingSupportVocabularyItem[];
+  readingPrompts: string[];
+}
+
 export interface NewsStory {
   id: string;
   headline: string;
@@ -37,8 +53,12 @@ export interface NewsStory {
   significanceScore: EditorialScore;
   discussionValueScore: EditorialScore;
   knowledgeValueScore: EditorialScore;
+  /** Development placeholder only; will be replaced by a rights-cleared publisher image. */
+  imageUrl: string;
+  imageAlt: string;
   whyWeChoseThis: string;
   keyVocabulary: string[];
   readingMode: ReadingMode;
   rightsStatus: RightsStatus;
+  readingSupport?: ReadingSupport;
 }

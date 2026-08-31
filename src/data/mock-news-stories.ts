@@ -1,9 +1,12 @@
 import type { NewsStory } from "@/types/news-story";
 
 /**
- * Placeholder stories for interface development only.
- * Headlines, sources, and "why we chose this" text are invented, not
- * scraped or reproduced from any real publisher.
+ * Placeholder stories for interface development.
+ * Most headlines, sources, and "why we chose this" text are invented, not
+ * scraped or reproduced from any real publisher. One entry (Technology,
+ * Reuters) is a real current story: only its headline, source, URL, and
+ * publication date are real; "why we chose this" and Key English are
+ * original commentary, not copied from the article.
  */
 export const mockNewsStories: NewsStory[] = [
   {
@@ -20,6 +23,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 5,
     discussionValueScore: 4,
     knowledgeValueScore: 3,
+    imageUrl: "/images/stories/cargo-port.jpg",
+    imageAlt:
+      "The container ship COSCO Shipping Danube being loaded at the Port of Rotterdam",
     whyWeChoseThis:
       "Sustained coverage across several independent outlets this week, and the outcome could reshape trade rules that affect prices learners already notice.",
     keyVocabulary: ["framework deal", "negotiations", "raise concerns", "authorities"],
@@ -27,24 +33,59 @@ export const mockNewsStories: NewsStory[] = [
     rightsStatus: "copyrighted",
   },
   {
-    id: "story-2026-08-26-low-power-chip",
-    headline:
-      "Researchers Unveil Low-Power Chip Design Aimed at Cutting AI Energy Use",
-    sourceName: "Meridian Tech Report",
-    sourceUrl: "https://example.com/news/low-power-ai-chip",
+    id: "story-2026-08-27-kioxia-sandisk-investment",
+    headline: "Kioxia, Sandisk to invest over $31 billion in Japan amid AI boom",
+    sourceName: "Reuters",
+    sourceUrl:
+      "https://www.reuters.com/world/asia-pacific/kioxia-sandisk-invest-over-31-billion-japan-amid-ai-boom-2026-08-27/",
     category: "Technology",
-    publicationDate: "2026-08-26",
+    publicationDate: "2026-08-27",
     estimatedLevel: "B2",
     estimatedReadingMinutes: 5,
-    trendingScore: 3,
-    significanceScore: 4,
-    discussionValueScore: 3,
+    trendingScore: 4,
+    significanceScore: 5,
+    discussionValueScore: 4,
     knowledgeValueScore: 5,
+    imageUrl: "/images/stories/semiconductor-chip.jpg",
+    imageAlt: "Bottom view of an Intel Pentium III computer chip showing its pins",
     whyWeChoseThis:
-      "A lightly reported but genuinely consequential story about the environmental cost of AI, with strong background-knowledge value for learners.",
-    keyVocabulary: ["energy efficiency", "prototype", "scale up", "carbon footprint"],
+      "Japan and the United States are making a major long-term investment in advanced memory-chip production as demand from AI continues to grow. The story connects AI development with manufacturing, government policy, and the global semiconductor industry.",
+    keyVocabulary: ["invest", "semiconductor", "memory chip", "government support", "surging demand"],
     readingMode: "authentic",
-    rightsStatus: "unclear-rights",
+    rightsStatus: "copyrighted",
+    readingSupport: {
+      background:
+        "AI systems need enormous amounts of data processing and memory. As demand for AI grows, companies are investing heavily in semiconductor factories and advanced memory chips. Kioxia is a major Japanese memory-chip maker, while Sandisk is an American data-storage company. The investment in this story shows how AI development is affecting manufacturing, government policy, and the global technology industry.",
+      vocabulary: [
+        {
+          term: "invest",
+          meaning:
+            "to put money into a business or project in order to help it grow",
+        },
+        {
+          term: "semiconductor",
+          meaning:
+            "a material or electronic component used to control electrical signals; semiconductors are essential in computer chips",
+        },
+        {
+          term: "memory chip",
+          meaning: "an electronic component that stores digital information",
+        },
+        {
+          term: "government support",
+          meaning: "financial or policy assistance provided by a government",
+        },
+        {
+          term: "surging demand",
+          meaning: "demand that is increasing very quickly",
+        },
+      ],
+      readingPrompts: [
+        "Why are Kioxia and Sandisk making such a large investment now?",
+        "What role is the Japanese government playing?",
+        "How is the growth of AI affecting the semiconductor industry?",
+      ],
+    },
   },
   {
     id: "story-2026-08-27-coral-recovery",
@@ -60,6 +101,8 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 4,
     discussionValueScore: 3,
     knowledgeValueScore: 5,
+    imageUrl: "/images/stories/coral-reef-underwater.jpg",
+    imageAlt: "A colorful coral outcrop on Flynn Reef, part of the Great Barrier Reef",
     whyWeChoseThis:
       "A hopeful, evidence-based science story that is easy to underestimate next to louder headlines, but offers strong knowledge value.",
     keyVocabulary: ["marine ecosystem", "conservation", "resilience", "survey"],
@@ -80,6 +123,8 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 3,
     discussionValueScore: 4,
     knowledgeValueScore: 4,
+    imageUrl: "/images/stories/student-sleeping.jpg",
+    imageAlt: "A student asleep at a classroom desk while studying",
     whyWeChoseThis:
       "Directly relevant to learners' own lives, and the publisher has granted reuse rights, so we can offer full interactive reading tools.",
     keyVocabulary: ["long-term memory", "sleep cycle", "cognitive function", "correlation"],
@@ -99,6 +144,8 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 4,
     discussionValueScore: 3,
     knowledgeValueScore: 4,
+    imageUrl: "/images/stories/financial-district.jpg",
+    imageAlt: "View of the Manhattan Financial District skyline",
     whyWeChoseThis:
       "Heavily reported across financial and general press this week, and it introduces economic vocabulary learners will keep encountering.",
     keyVocabulary: ["inflation", "interest rate", "gradual", "monetary policy"],
@@ -118,6 +165,8 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 3,
     discussionValueScore: 5,
     knowledgeValueScore: 3,
+    imageUrl: "/images/stories/urban-bike-street.jpg",
+    imageAlt: "Pedestrians and cyclists filling a tree-lined city street on a car-free day",
     whyWeChoseThis:
       "A concrete local policy experiment that invites strong discussion and connects easily to learners' own cities.",
     keyVocabulary: ["pilot program", "air quality", "emissions", "public transport"],

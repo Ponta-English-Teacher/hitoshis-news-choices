@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { mockNewsStories } from "@/data/mock-news-stories";
+import { ReadingSupportPage } from "@/components/ReadingSupportPage";
 import styles from "./page.module.css";
 
 export default async function StoryPage({
@@ -11,6 +12,12 @@ export default async function StoryPage({
 
   if (!story) {
     notFound();
+  }
+
+  if (story.readingSupport) {
+    return (
+      <ReadingSupportPage story={story} readingSupport={story.readingSupport} />
+    );
   }
 
   return (

@@ -19,8 +19,17 @@
   color: var(--foreground);
 }
 
+.dateRange {
+  margin-top: 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .subtitle {
-  margin-top: 0.65rem;
+  margin-top: 0.5rem;
   font-size: 1.05rem;
   line-height: 1.5;
   color: var(--muted-foreground);
