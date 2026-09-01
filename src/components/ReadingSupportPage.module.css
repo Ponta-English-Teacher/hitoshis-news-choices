@@ -193,6 +193,101 @@
   outline: none;
 }
 
+.askForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.askInput {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.92rem;
+  color: var(--foreground);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+}
+
+.askInput:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.askInput:disabled {
+  opacity: 0.6;
+}
+
+.askButton {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--surface);
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 0.55rem 1.25rem;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.askButton:hover:not(:disabled),
+.askButton:focus-visible:not(:disabled) {
+  opacity: 0.88;
+  outline: none;
+}
+
+.askButton:disabled {
+  opacity: 0.5;
+}
+
+.chatHistory {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.chatTurn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.chatTurn:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.chatLabel {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+
+.chatQuestion {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--foreground);
+}
+
+.chatAnswer {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chatAnswer p,
+.chatAnswer ul {
+  margin: 0;
+}
+
+.chatAnswer ul {
+  padding-left: 1.2rem;
+}
+
 .translationError {
   font-size: 0.9rem;
   line-height: 1.5;

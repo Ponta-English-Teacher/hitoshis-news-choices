@@ -4,7 +4,13 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { NewsStory, ReadingSupport } from "@/types/news-story";
+import { renderSimpleMarkdown } from "@/lib/simple-markdown";
 import styles from "./ReadingSupportPage.module.css";
+
+interface ChatTurn {
+  question: string;
+  answer: string;
+}
 
 interface ActiveSelection {
   text: string;
@@ -25,6 +31,7 @@ export function ReadingSupportPage({
   const toolbarRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
+  const isComposingRef = useRef(false);
 
   const [selection, setSelection] = useState<ActiveSelection | null>(null);
   const [toolbarPosition, setToolbarPosition] = useState<{ top: number; left: number } | null>(null);
@@ -33,6 +40,11 @@ export function ReadingSupportPage({
   const [translation, setTranslation] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [listenError, setListenError] = useState<string | null>(null);
+
+  const [chatHistory, setChatHistory] = useState<ChatTurn[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
+  const [chatError, setChatError] = useState<string | null>(null);
 
   useLayoutEffect(() => {
     function handleSelectionChange() {
@@ -160,6 +172,47 @@ export function ReadingSupportPage({
     }
   }
 
+  async function handleSendChatMessage() {
+    const question = chatInput.trim();
+    if (!question || chatLoading) return;
+
+    setChatLoading(true);
+    setChatError(null);
+
+    try {
+      const res = await fetch("/api/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question,
+          history: chatHistory,
+          storyContext: {
+            headline: story.headline,
+            sourceName: story.sourceName,
+            category: story.category,
+            publicationDate: story.publicationDate,
+            whyWeChoseThis: story.whyWeChoseThis,
+            background: readingSupport.background,
+            vocabulary: readingSupport.vocabulary,
+            readingPrompts: readingSupport.readingPrompts,
+          },
+        }),
+      });
+      const data: { ok: boolean; answer?: string; error?: string } = await res.json();
+
+      if (data.ok) {
+        setChatHistory((prev) => [...prev, { question, answer: data.answer ?? "" }]);
+        setChatInput("");
+      } else {
+        setChatError(data.error ?? "Something went wrong.");
+      }
+    } catch {
+      setChatError("Couldn't reach the AI assistant. Please check your connection.");
+    } finally {
+      setChatLoading(false);
+    }
+  }
+
   return (
     <div className={`${styles.page} ${styles.compact}`}>
       <Link href="/" className={styles.back}>
@@ -247,6 +300,67 @@ export function ReadingSupportPage({
         >
           Open Reuters Article →
         </a>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>AI Chat</h2>
+        <p className={styles.promptsIntro}>Ask questions about this story or topic.</p>
+
+        {chatHistory.length > 0 && (
+          <div className={styles.chatHistory}>
+            {chatHistory.map((turn, i) => (
+              <div key={i} className={styles.chatTurn}>
+                <p className={styles.chatQuestion}>
+                  <span className={styles.chatLabel}>You:</span> {turn.question}
+                </p>
+                <div className={styles.chatAnswer}>
+                  <span className={styles.chatLabel}>AI:</span>
+                  {renderSimpleMarkdown(turn.answer)}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {chatLoading && <p className={styles.promptsIntro}>AI is responding&hellip;</p>}
+        {chatError && !chatLoading && <p className={styles.translationError}>{chatError}</p>}
+
+        <div className={styles.askForm}>
+          <input
+            type="text"
+            value={chatInput}
+            onChange={(e) => setChatInput(e.target.value)}
+            onCompositionStart={() => {
+              isComposingRef.current = true;
+            }}
+            onCompositionEnd={() => {
+              isComposingRef.current = false;
+            }}
+            onKeyDown={(e) => {
+              if (e.key !== "Enter") return;
+              // Skip while an IME composition (Japanese/Chinese/Korean, etc.)
+              // is active, so Enter can confirm kana/kanji conversion
+              // instead of submitting an unfinished question. isComposingRef
+              // is the source of truth (set by the composition events above);
+              // nativeEvent.isComposing is checked too since some browsers
+              // (notably Safari) still report it true on the very keydown
+              // that ends composition.
+              if (isComposingRef.current || e.nativeEvent.isComposing) return;
+              if (!chatLoading) handleSendChatMessage();
+            }}
+            placeholder="Type your question..."
+            className={styles.askInput}
+            disabled={chatLoading}
+          />
+          <button
+            type="button"
+            onClick={handleSendChatMessage}
+            disabled={chatLoading || !chatInput.trim()}
+            className={styles.askButton}
+          >
+            {chatLoading ? "Asking..." : "Ask"}
+          </button>
+        </div>
       </section>
 
       {selection && (
