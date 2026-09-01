@@ -1,176 +1,351 @@
 import type { NewsStory } from "@/types/news-story";
 
 /**
- * Placeholder stories for interface development.
- * Most headlines, sources, and "why we chose this" text are invented, not
- * scraped or reproduced from any real publisher. One entry (Technology,
- * Reuters) is a real current story: only its headline, source, URL, and
- * publication date are real; "why we chose this" and Key English are
- * original commentary, not copied from the article.
+ * Real current news stories for this week's edition, selected automatically
+ * by the GDELT + OpenAI pipeline (scripts/generate-real-edition.mjs)
+ * following EDITORIAL_POLICY.md. Headlines, sources, URLs, and publication
+ * dates are real; "why we chose this," background, vocabulary, and reading
+ * prompts are original commentary written for learners, never copied from
+ * the articles. Story images are a neutral placeholder
+ * (public/images/stories/placeholder.png) — no publisher photographs are
+ * used. See TECHNICAL_DECISIONS.md for the discovery/selection pipeline.
+ * Generated: 2026-09-01T13:36:49.006Z
  */
 export const mockNewsStories: NewsStory[] = [
   {
-    id: "story-2026-08-25-trade-framework",
-    headline:
-      "Negotiators Reach Framework Deal to Ease Regional Trade Tensions",
-    sourceName: "Harbor News Wire",
-    sourceUrl: "https://example.com/news/trade-framework-deal",
-    category: "Politics",
-    publicationDate: "2026-08-25",
+    id: "story-2026-09-01-ive-never-been-to-afghanistan-six",
+    headline: "I've never been to Afghanistan: Six million deportees forced to start over under the Taliban",
+    sourceName: "BBC",
+    sourceUrl: "https://www.bbc.com/news/articles/c2e074nn8eko",
+    category: "Asia Pickup",
+    publicationDate: "2026-09-01",
     estimatedLevel: "B1+",
     estimatedReadingMinutes: 6,
     trendingScore: 4,
     significanceScore: 5,
-    discussionValueScore: 4,
-    knowledgeValueScore: 3,
-    imageUrl: "/images/stories/cargo-port.jpg",
-    imageAlt:
-      "The container ship COSCO Shipping Danube being loaded at the Port of Rotterdam",
-    whyWeChoseThis:
-      "Sustained coverage across several independent outlets this week, and the outcome could reshape trade rules that affect prices learners already notice.",
-    keyVocabulary: ["framework deal", "negotiations", "raise concerns", "authorities"],
-    readingMode: "authentic",
-    rightsStatus: "copyrighted",
-  },
-  {
-    id: "story-2026-08-27-kioxia-sandisk-investment",
-    headline: "Kioxia, Sandisk to invest over $31 billion in Japan amid AI boom",
-    sourceName: "Reuters",
-    sourceUrl:
-      "https://www.reuters.com/world/asia-pacific/kioxia-sandisk-invest-over-31-billion-japan-amid-ai-boom-2026-08-27/",
-    category: "Technology",
-    publicationDate: "2026-08-27",
-    estimatedLevel: "B2",
-    estimatedReadingMinutes: 5,
-    trendingScore: 4,
-    significanceScore: 5,
-    discussionValueScore: 4,
-    knowledgeValueScore: 5,
-    imageUrl: "/images/stories/semiconductor-chip.jpg",
-    imageAlt: "Bottom view of an Intel Pentium III computer chip showing its pins",
-    whyWeChoseThis:
-      "Japan and the United States are making a major long-term investment in advanced memory-chip production as demand from AI continues to grow. The story connects AI development with manufacturing, government policy, and the global semiconductor industry.",
-    keyVocabulary: ["invest", "semiconductor", "memory chip", "government support", "surging demand"],
+    discussionValueScore: 5,
+    knowledgeValueScore: 4,
+    imageUrl: "/images/stories/placeholder.png",
+    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    whyWeChoseThis: "This story gives a human view of a huge regional crisis: millions of Afghans being pushed into a country many barely know, now ruled by the Taliban. It is important, current, and useful for learning language around migration, identity, and political instability.",
+    keyVocabulary: [
+      "deportee",
+      "Taliban",
+      "start over",
+      "forced return",
+      "identity",
+    ],
     readingMode: "authentic",
     rightsStatus: "copyrighted",
     readingSupport: {
-      background:
-        "AI systems need enormous amounts of data processing and memory. As demand for AI grows, companies are investing heavily in semiconductor factories and advanced memory chips. Kioxia is a major Japanese memory-chip maker, while Sandisk is an American data-storage company. The investment in this story shows how AI development is affecting manufacturing, government policy, and the global technology industry.",
+      background: "This story looks at Afghans who are being sent back to Afghanistan at a time when the country is ruled by the Taliban. The headline describes a much larger movement of six million deportees, while the verified details note that, by August, another one million people had been forced to return this year from Pakistan and Iran. For English learners, the story offers useful context for words such as deportee, returnee, border, identity, and resettlement. It also shows that “going back” does not always mean returning to a familiar home, especially for people who may have spent much of their lives outside Afghanistan.",
       vocabulary: [
         {
-          term: "invest",
-          meaning:
-            "to put money into a business or project in order to help it grow",
+          term: "deportee",
+          meaning: "A deportee is a person who is officially sent out of a country by the government.",
         },
         {
-          term: "semiconductor",
-          meaning:
-            "a material or electronic component used to control electrical signals; semiconductors are essential in computer chips",
+          term: "Taliban",
+          meaning: "The Taliban is the political and military group currently ruling Afghanistan.",
         },
         {
-          term: "memory chip",
-          meaning: "an electronic component that stores digital information",
+          term: "start over",
+          meaning: "To start over means to begin a new life or situation again after a major change.",
         },
         {
-          term: "government support",
-          meaning: "financial or policy assistance provided by a government",
+          term: "forced return",
+          meaning: "A forced return happens when people must go back to a country even if they do not want to.",
         },
         {
-          term: "surging demand",
-          meaning: "demand that is increasing very quickly",
+          term: "identity",
+          meaning: "Identity means how people understand who they are, including their culture, nationality, language, and personal history.",
         },
       ],
       readingPrompts: [
-        "Why are Kioxia and Sandisk making such a large investment now?",
-        "What role is the Japanese government playing?",
-        "How is the growth of AI affecting the semiconductor industry?",
+        "How might someone feel if they are sent to a country they do not really know?",
+        "What challenges can people face when they have to start life again?",
+        "How does political instability affect ordinary families and individuals?",
       ],
     },
   },
   {
-    id: "story-2026-08-27-coral-recovery",
-    headline:
-      "Ocean Survey Finds Coral Reefs Recovering Faster Than Expected in Protected Zones",
-    sourceName: "Clearline Science Journal",
-    sourceUrl: "https://example.com/news/coral-reef-recovery-survey",
-    category: "Science",
-    publicationDate: "2026-08-27",
+    id: "story-2026-09-01-nepal-tibet-toll-tops-1-000",
+    headline: "Nepal-Tibet toll tops 1,000 as tunnel rescue offers last hope",
+    sourceName: "Channel News Asia",
+    sourceUrl: "https://www.channelnewsasia.com/asia/nepal-tibet-toll-1000-rescue-tunnel-6354286",
+    category: "World & Conflict",
+    publicationDate: "2026-09-01",
     estimatedLevel: "B1",
-    estimatedReadingMinutes: 4,
-    trendingScore: 2,
-    significanceScore: 4,
-    discussionValueScore: 3,
-    knowledgeValueScore: 5,
-    imageUrl: "/images/stories/coral-reef-underwater.jpg",
-    imageAlt: "A colorful coral outcrop on Flynn Reef, part of the Great Barrier Reef",
-    whyWeChoseThis:
-      "A hopeful, evidence-based science story that is easy to underestimate next to louder headlines, but offers strong knowledge value.",
-    keyVocabulary: ["marine ecosystem", "conservation", "resilience", "survey"],
-    readingMode: "authentic",
-    rightsStatus: "copyrighted",
-  },
-  {
-    id: "story-2026-08-27-sleep-memory-study",
-    headline:
-      "New Study Links Sleep Patterns to Long-Term Memory Performance in Teens",
-    sourceName: "Northgate Health Journal",
-    sourceUrl: "https://example.com/news/sleep-teen-memory-study",
-    category: "Health",
-    publicationDate: "2026-08-27",
-    estimatedLevel: "B1",
-    estimatedReadingMinutes: 5,
-    trendingScore: 3,
-    significanceScore: 3,
+    estimatedReadingMinutes: 3,
+    trendingScore: 5,
+    significanceScore: 5,
     discussionValueScore: 4,
     knowledgeValueScore: 4,
-    imageUrl: "/images/stories/student-sleeping.jpg",
-    imageAlt: "A student asleep at a classroom desk while studying",
-    whyWeChoseThis:
-      "Directly relevant to learners' own lives, and the publisher has granted reuse rights, so we can offer full interactive reading tools.",
-    keyVocabulary: ["long-term memory", "sleep cycle", "cognitive function", "correlation"],
-    readingMode: "interactive",
-    rightsStatus: "reuse-permitted",
+    imageUrl: "/images/stories/placeholder.png",
+    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    whyWeChoseThis: "The Nepal-Tibet floods are one of the week’s deadliest disasters, with rescue efforts still unfolding. The story also helps readers connect extreme weather, mountain geography, and disaster response.",
+    keyVocabulary: [
+      "flood toll",
+      "rescue effort",
+      "tunnel",
+      "missing people",
+      "extreme weather",
+    ],
+    readingMode: "authentic",
+    rightsStatus: "copyrighted",
+    readingSupport: {
+      background: "This story focuses on a deadly Nepal-Tibet disaster in which the reported toll has risen above 1,000, while a tunnel rescue is described as a final source of hope. The verified figures show the scale of uncertainty that remains: nearly 4,500 people are still missing, including 3,916 in Nepal and 546 in China’s Tibet. For learners, the article is useful for understanding disaster-response language such as toll, missing, rescue, tunnel, and last hope. It also highlights how reports from mountain regions can involve more than one country or territory, making numbers and rescue information especially important to read carefully.",
+      vocabulary: [
+        {
+          term: "flood toll",
+          meaning: "A flood toll is the number of people killed, injured, or affected by a flood.",
+        },
+        {
+          term: "rescue effort",
+          meaning: "A rescue effort is organized work to save people from danger.",
+        },
+        {
+          term: "tunnel",
+          meaning: "A tunnel is a passage built through or under the ground, a mountain, or another barrier.",
+        },
+        {
+          term: "missing people",
+          meaning: "Missing people are people whose location is unknown and who may be in danger.",
+        },
+        {
+          term: "extreme weather",
+          meaning: "Extreme weather means very severe weather, such as heavy rain, floods, storms, or heat.",
+        },
+      ],
+      readingPrompts: [
+        "Why can rescue work be harder in mountain areas?",
+        "What kinds of support do communities need after a major flood?",
+        "How might extreme weather change the risks people face in daily life?",
+      ],
+    },
   },
   {
-    id: "story-2026-08-28-central-bank-rates",
-    headline: "Central Bank Signals Gradual Rate Cuts as Inflation Cools",
-    sourceName: "Fenwick Business Daily",
-    sourceUrl: "https://example.com/news/central-bank-rate-signal",
-    category: "Business",
-    publicationDate: "2026-08-28",
+    id: "story-2026-08-31-us-and-iran-exchange-fire-for",
+    headline: "US and Iran exchange fire for first time in a month",
+    sourceName: "Channel News Asia",
+    sourceUrl: "https://www.channelnewsasia.com/watch/us-and-iran-exchange-fire-first-time-in-month-6352296",
+    category: "World & Conflict",
+    publicationDate: "2026-08-31",
+    estimatedLevel: "B1+",
+    estimatedReadingMinutes: 3,
+    trendingScore: 5,
+    significanceScore: 5,
+    discussionValueScore: 4,
+    knowledgeValueScore: 4,
+    imageUrl: "/images/stories/placeholder.png",
+    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    whyWeChoseThis: "A renewed exchange of fire between the U.S. and Iran is a major escalation with possible consequences for regional security and global energy markets. It is a concise way for learners to follow a fast-moving international conflict.",
+    keyVocabulary: [
+      "exchange fire",
+      "escalation",
+      "military strike",
+      "ceasefire",
+      "regional security",
+    ],
+    readingMode: "authentic",
+    rightsStatus: "copyrighted",
+    readingSupport: {
+      background: "This story describes a renewed exchange of fire between the United States and Iran in the Middle East, the first such exchange in a month according to the headline. The verified details say Tehran targeted US military sites in the Gulf after Washington attacked rocket launchers on Iran’s Larak island in the Strait of Hormuz. US Central Command also rejected Tehran’s claim that the strike was an “act of aggression.” For English learners, this is a useful article for vocabulary around military action and diplomacy, including terms such as target, military site, rocket launcher, accusation, and aggression. It also shows how each side may describe the same event differently.",
+      vocabulary: [
+        {
+          term: "exchange fire",
+          meaning: "To exchange fire means that two sides shoot or attack each other.",
+        },
+        {
+          term: "escalation",
+          meaning: "Escalation is a situation becoming more serious, dangerous, or intense.",
+        },
+        {
+          term: "military strike",
+          meaning: "A military strike is an attack carried out by armed forces.",
+        },
+        {
+          term: "ceasefire",
+          meaning: "A ceasefire is an agreement or period when fighting is supposed to stop.",
+        },
+        {
+          term: "regional security",
+          meaning: "Regional security means the safety and stability of countries in a particular area.",
+        },
+      ],
+      readingPrompts: [
+        "What words in the article suggest the conflict is becoming more serious?",
+        "How might one military incident affect nearby countries?",
+        "Why can conflicts in one region influence global markets?",
+      ],
+    },
+  },
+  {
+    id: "story-2026-08-31-us-trade-regulator-and-22-states",
+    headline: "US trade regulator and 22 states accuse Amazon of taking $20bn with secret surcharges",
+    sourceName: "The Guardian",
+    sourceUrl: "https://www.theguardian.com/technology/2026/aug/31/amazon-advertising-lawsuit",
+    category: "Business & Economy",
+    publicationDate: "2026-08-31",
     estimatedLevel: "B2",
-    estimatedReadingMinutes: 6,
+    estimatedReadingMinutes: 4,
     trendingScore: 4,
     significanceScore: 4,
-    discussionValueScore: 3,
-    knowledgeValueScore: 4,
-    imageUrl: "/images/stories/financial-district.jpg",
-    imageAlt: "View of the Manhattan Financial District skyline",
-    whyWeChoseThis:
-      "Heavily reported across financial and general press this week, and it introduces economic vocabulary learners will keep encountering.",
-    keyVocabulary: ["inflation", "interest rate", "gradual", "monetary policy"],
+    discussionValueScore: 4,
+    knowledgeValueScore: 5,
+    imageUrl: "/images/stories/placeholder.png",
+    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    whyWeChoseThis: "The Amazon lawsuit is a major business and consumer-protection story involving online advertising, state governments, and alleged hidden charges. It offers useful vocabulary for understanding regulation of large technology platforms.",
+    keyVocabulary: [
+      "trade regulator",
+      "surcharge",
+      "advertising practices",
+      "lawsuit",
+      "consumer protection",
+    ],
     readingMode: "authentic",
     rightsStatus: "copyrighted",
+    readingSupport: {
+      background: "This business story centers on a lawsuit against Amazon brought by the US Federal Trade Commission and 22 states. According to the headline, regulators accuse the company of taking $20 billion through secret surcharges. The verified description says the FTC alleges that the online retailer overcharged advertisers in a hidden and systematic way over a period of years. For learners, the article is a good chance to study consumer-protection and business vocabulary such as regulator, lawsuit, surcharge, advertiser, overcharge, and allege. It also shows how large online platforms can face legal challenges not only from national agencies, but also from state governments.",
+      vocabulary: [
+        {
+          term: "trade regulator",
+          meaning: "A trade regulator is a government body that checks whether companies follow business and market rules.",
+        },
+        {
+          term: "surcharge",
+          meaning: "A surcharge is an extra fee added to the usual price or cost.",
+        },
+        {
+          term: "advertising practices",
+          meaning: "Advertising practices are the methods companies use to promote products or services.",
+        },
+        {
+          term: "lawsuit",
+          meaning: "A lawsuit is a legal case brought to a court or legal authority.",
+        },
+        {
+          term: "consumer protection",
+          meaning: "Consumer protection means laws and actions designed to keep buyers safe from unfair or misleading business behavior.",
+        },
+      ],
+      readingPrompts: [
+        "What is the difference between an accusation and a proven fact in a legal story?",
+        "Why might hidden or unclear charges be a consumer-protection issue?",
+        "How should governments regulate very large online platforms?",
+      ],
+    },
   },
   {
-    id: "story-2026-08-29-car-free-weekends",
-    headline: "City Pilots Car-Free Weekends to Test Effect on Air Quality",
-    sourceName: "Cascade Public Journal",
-    sourceUrl: "https://example.com/news/car-free-weekend-pilot",
-    category: "Environment",
-    publicationDate: "2026-08-29",
-    estimatedLevel: "A2",
+    id: "story-2026-08-31-chatgpt-becomes-first-ai-chatbot-to",
+    headline: "ChatGPT becomes first AI chatbot to face tougher EU rules",
+    sourceName: "Channel News Asia",
+    sourceUrl: "https://www.channelnewsasia.com/business/eu-chatgpt-reddit-roblox-tougher-regulation-6351981",
+    category: "Technology & AI",
+    publicationDate: "2026-08-31",
+    estimatedLevel: "B1+",
     estimatedReadingMinutes: 4,
-    trendingScore: 2,
-    significanceScore: 3,
+    trendingScore: 5,
+    significanceScore: 5,
     discussionValueScore: 5,
-    knowledgeValueScore: 3,
-    imageUrl: "/images/stories/urban-bike-street.jpg",
-    imageAlt: "Pedestrians and cyclists filling a tree-lined city street on a car-free day",
-    whyWeChoseThis:
-      "A concrete local policy experiment that invites strong discussion and connects easily to learners' own cities.",
-    keyVocabulary: ["pilot program", "air quality", "emissions", "public transport"],
+    knowledgeValueScore: 4,
+    imageUrl: "/images/stories/placeholder.png",
+    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    whyWeChoseThis: "ChatGPT facing tougher EU rules is a clear example of how governments are beginning to regulate powerful AI tools. The story is highly relevant for students because it connects technology they know with law, safety, and public policy.",
+    keyVocabulary: [
+      "AI chatbot",
+      "EU rules",
+      "regulation",
+      "compliance",
+      "transparency",
+    ],
     readingMode: "authentic",
     rightsStatus: "copyrighted",
+    readingSupport: {
+      background: "This technology story is about ChatGPT becoming the first artificial intelligence chatbot to face tougher European Union rules. The verified details say Brussels added ChatGPT on Monday, August 31, to a list of digital services that must meet stronger safety requirements and accept greater legal scrutiny. The same announcement also named Reddit and Roblox as “very large” online platforms. For English learners, the article gives useful vocabulary for discussing technology regulation, including comply, safety rules, digital services, legal scrutiny, and online platform. It also shows how familiar apps and AI tools are increasingly being treated as subjects of public policy, not just private products.",
+      vocabulary: [
+        {
+          term: "AI chatbot",
+          meaning: "An AI chatbot is a computer program that uses artificial intelligence to answer questions or have conversations.",
+        },
+        {
+          term: "EU rules",
+          meaning: "EU rules are laws or requirements made by the European Union for its member countries and markets.",
+        },
+        {
+          term: "regulation",
+          meaning: "Regulation is the control of an activity or industry through official rules.",
+        },
+        {
+          term: "compliance",
+          meaning: "Compliance means following laws, rules, or official requirements.",
+        },
+        {
+          term: "transparency",
+          meaning: "Transparency means being open and clear about how something works or how decisions are made.",
+        },
+      ],
+      readingPrompts: [
+        "Why might governments want stricter rules for AI chatbots?",
+        "What benefits and risks do students experience when using AI tools?",
+        "What responsibilities should companies have when they build powerful technology?",
+      ],
+    },
+  },
+  {
+    id: "story-2026-09-01-congo-authorities-report-more-than-6",
+    headline: "Congo authorities report more than 6,000 confirmed Ebola cases and nearly 3,000 deaths",
+    sourceName: "The Associated Press (via NBC News)",
+    sourceUrl: "https://www.nbcnews.com/world/africa/congo-authorities-report-6000-confirmed-ebola-cases-nearly-3000-deaths-rcna595427",
+    category: "World Pickup",
+    publicationDate: "2026-09-01",
+    estimatedLevel: "B1+",
+    estimatedReadingMinutes: 3,
+    trendingScore: 4,
+    significanceScore: 5,
+    discussionValueScore: 4,
+    knowledgeValueScore: 5,
+    imageUrl: "/images/stories/placeholder.png",
+    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    whyWeChoseThis: "A major Ebola outbreak in Congo is a serious global health story that deserves attention beyond the biggest political headlines. It also gives learners important public-health vocabulary and background knowledge.",
+    keyVocabulary: [
+      "Ebola",
+      "confirmed cases",
+      "outbreak",
+      "public health",
+      "authorities",
+    ],
+    readingMode: "authentic",
+    rightsStatus: "copyrighted",
+    readingSupport: {
+      background: "This public-health story concerns Ebola in Congo, where authorities report more than 6,000 confirmed cases and nearly 3,000 deaths. The verified details add another important part of the picture: more than 1,360 people have recovered from the virus, which authorities described as an encouraging development. For learners, the article is useful for understanding health and emergency vocabulary such as confirmed case, death, recover, virus, authorities, and development. It also shows why outbreak reports often include several kinds of numbers at the same time: total infections, deaths, and recoveries can each tell readers something different about the situation.",
+      vocabulary: [
+        {
+          term: "Ebola",
+          meaning: "Ebola is a serious infectious disease that can cause severe illness and death.",
+        },
+        {
+          term: "confirmed cases",
+          meaning: "Confirmed cases are people officially identified as having a disease through accepted medical checks.",
+        },
+        {
+          term: "outbreak",
+          meaning: "An outbreak is a sudden increase in cases of a disease in a place.",
+        },
+        {
+          term: "public health",
+          meaning: "Public health is the work of protecting and improving the health of whole communities.",
+        },
+        {
+          term: "authorities",
+          meaning: "Authorities are official people or organizations with the power to make decisions or give information.",
+        },
+      ],
+      readingPrompts: [
+        "Why is clear public information important during a disease outbreak?",
+        "How can a health crisis affect communities beyond hospitals?",
+        "What language does the article use to show the scale of the outbreak?",
+      ],
+    },
   },
 ];

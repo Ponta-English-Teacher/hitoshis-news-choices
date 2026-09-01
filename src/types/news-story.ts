@@ -1,14 +1,13 @@
 export type CEFRLevel = "A1" | "A2" | "B1" | "B1+" | "B2" | "B2+" | "C1" | "C2";
 
+/** The six stable categories from EDITORIAL_POLICY.md — labels assigned after selection, not required slots. */
 export type NewsCategory =
-  | "World"
-  | "Politics"
-  | "Business"
-  | "Technology"
-  | "Science"
-  | "Health"
-  | "Environment"
-  | "Society";
+  | "U.S. & Politics"
+  | "World & Conflict"
+  | "Business & Economy"
+  | "Technology & AI"
+  | "Asia Pickup"
+  | "World Pickup";
 
 /** 1-5, matching the blueprint's indicator scale (e.g. Trending 🔥 4/5). */
 export type EditorialScore = 1 | 2 | 3 | 4 | 5;
