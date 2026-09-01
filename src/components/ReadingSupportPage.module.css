@@ -180,3 +180,62 @@
   opacity: 0.88;
   outline: none;
 }
+
+.translationError {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #b3261e;
+}
+
+.translationText {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.selectionToolbar {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  padding: 0.25rem;
+}
+
+.selectionToolbar .translateButton + .translateButton {
+  border-left: 1px solid var(--border);
+  border-radius: 0 999px 999px 0;
+}
+
+.translateButton {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--foreground);
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+}
+
+.translateButton:hover,
+.translateButton:focus-visible {
+  background: var(--accent-soft);
+  outline: none;
+}
+
+.listenErrorToast {
+  position: fixed;
+  z-index: 50;
+  max-width: 260px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #b3261e;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.7rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
