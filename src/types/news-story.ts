@@ -15,6 +15,24 @@ export type EditorialScore = 1 | 2 | 3 | 4 | 5;
 export type ReadingMode = "authentic" | "interactive";
 
 /**
+ * Image-selection priority tier, per IMAGE_POLICY.md:
+ * - "licensed-real": a real, legally reusable photograph of the actual event.
+ * - "licensed-contextual": a real, legally reusable photograph that is
+ *   relevant context (place/institution/company/person/file photo) but does
+ *   not depict the specific event itself.
+ * - "ai-generated": an AI-generated illustration, used only when no
+ *   suitable real image (real or contextual) could be found. Must be
+ *   labelled as such in the UI.
+ * - "placeholder": the temporary neutral placeholder — a technical
+ *   fallback during generation, not meant to remain in a published edition.
+ */
+export type ImageSourceType =
+  | "licensed-real"
+  | "licensed-contextual"
+  | "ai-generated"
+  | "placeholder";
+
+/**
  * Mirrors the blueprint's three source-rights tiers (Section 4), which
  * determine both default behavior and which ReadingMode is allowed.
  */
@@ -52,9 +70,9 @@ export interface NewsStory {
   significanceScore: EditorialScore;
   discussionValueScore: EditorialScore;
   knowledgeValueScore: EditorialScore;
-  /** Development placeholder only; will be replaced by a rights-cleared publisher image. */
   imageUrl: string;
   imageAlt: string;
+  imageSourceType: ImageSourceType;
   whyWeChoseThis: string;
   keyVocabulary: string[];
   readingMode: ReadingMode;

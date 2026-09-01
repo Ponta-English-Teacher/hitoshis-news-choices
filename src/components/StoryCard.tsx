@@ -14,6 +14,9 @@ export function StoryCard({ story }: { story: NewsStory }) {
           sizes="(max-width: 700px) 100vw, 520px"
           className={styles.image}
         />
+        {story.imageSourceType === "ai-generated" && (
+          <span className={styles.aiImageBadge}>AI-generated illustration</span>
+        )}
       </div>
 
       <div className={styles.content}>

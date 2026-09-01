@@ -175,6 +175,9 @@ export function ReadingSupportPage({
             sizes="(max-width: 700px) 100vw, 700px"
             className={styles.image}
           />
+          {story.imageSourceType === "ai-generated" && (
+            <span className={styles.aiImageBadge}>AI-generated illustration</span>
+          )}
         </div>
         <div className={styles.headerContent}>
           <p className={styles.category}>{story.category}</p>

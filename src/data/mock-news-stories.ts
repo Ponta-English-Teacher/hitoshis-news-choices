@@ -6,9 +6,11 @@ import type { NewsStory } from "@/types/news-story";
  * following EDITORIAL_POLICY.md. Headlines, sources, URLs, and publication
  * dates are real; "why we chose this," background, vocabulary, and reading
  * prompts are original commentary written for learners, never copied from
- * the articles. Story images are a neutral placeholder
- * (public/images/stories/placeholder.png) — no publisher photographs are
- * used. See TECHNICAL_DECISIONS.md for the discovery/selection pipeline.
+ * the articles. Story images are real photographs sourced from Wikimedia
+ * Commons under their stated free-reuse licenses (see IMAGE_CREDITS.md) —
+ * not publisher photographs, and not necessarily photos of the exact 2026
+ * event where noted in imageAlt. See TECHNICAL_DECISIONS.md for the
+ * discovery/selection pipeline.
  * Generated: 2026-09-01T13:36:49.006Z
  */
 export const mockNewsStories: NewsStory[] = [
@@ -25,8 +27,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 5,
     discussionValueScore: 5,
     knowledgeValueScore: 4,
-    imageUrl: "/images/stories/placeholder.png",
-    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    imageUrl: "/images/stories/afghan-refugee-camp-pakistan.jpg",
+    imageAlt: "An Afghan refugee camp in Pakistan",
+    imageSourceType: "licensed-contextual",
     whyWeChoseThis: "This story gives a human view of a huge regional crisis: millions of Afghans being pushed into a country many barely know, now ruled by the Taliban. It is important, current, and useful for learning language around migration, identity, and political instability.",
     keyVocabulary: [
       "deportee",
@@ -81,8 +84,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 5,
     discussionValueScore: 4,
     knowledgeValueScore: 4,
-    imageUrl: "/images/stories/placeholder.png",
-    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    imageUrl: "/images/stories/nepal-tibet-flood-satellite.jpg",
+    imageAlt: "Satellite image of the Nepal flash flood, captured by ESA's Copernicus Sentinel-2 mission in August 2026",
+    imageSourceType: "licensed-real",
     whyWeChoseThis: "The Nepal-Tibet floods are one of the week’s deadliest disasters, with rescue efforts still unfolding. The story also helps readers connect extreme weather, mountain geography, and disaster response.",
     keyVocabulary: [
       "flood toll",
@@ -137,8 +141,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 5,
     discussionValueScore: 4,
     knowledgeValueScore: 4,
-    imageUrl: "/images/stories/placeholder.png",
-    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    imageUrl: "/images/stories/us-navy-strait-of-hormuz.jpg",
+    imageAlt: "A U.S. Navy carrier strike group transiting the Strait of Hormuz (file photo, 2023, not a photo of the 2026 incident)",
+    imageSourceType: "licensed-contextual",
     whyWeChoseThis: "A renewed exchange of fire between the U.S. and Iran is a major escalation with possible consequences for regional security and global energy markets. It is a concise way for learners to follow a fast-moving international conflict.",
     keyVocabulary: [
       "exchange fire",
@@ -193,8 +198,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 4,
     discussionValueScore: 4,
     knowledgeValueScore: 5,
-    imageUrl: "/images/stories/placeholder.png",
-    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    imageUrl: "/images/stories/amazon-fulfillment-center.jpg",
+    imageAlt: "An Amazon fulfillment center in Shakopee, Minnesota",
+    imageSourceType: "licensed-contextual",
     whyWeChoseThis: "The Amazon lawsuit is a major business and consumer-protection story involving online advertising, state governments, and alleged hidden charges. It offers useful vocabulary for understanding regulation of large technology platforms.",
     keyVocabulary: [
       "trade regulator",
@@ -249,8 +255,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 5,
     discussionValueScore: 5,
     knowledgeValueScore: 4,
-    imageUrl: "/images/stories/placeholder.png",
-    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    imageUrl: "/images/stories/eu-berlaymont-building.jpg",
+    imageAlt: "The Berlaymont building in Brussels, headquarters of the European Commission",
+    imageSourceType: "licensed-contextual",
     whyWeChoseThis: "ChatGPT facing tougher EU rules is a clear example of how governments are beginning to regulate powerful AI tools. The story is highly relevant for students because it connects technology they know with law, safety, and public policy.",
     keyVocabulary: [
       "AI chatbot",
@@ -305,8 +312,9 @@ export const mockNewsStories: NewsStory[] = [
     significanceScore: 5,
     discussionValueScore: 4,
     knowledgeValueScore: 5,
-    imageUrl: "/images/stories/placeholder.png",
-    imageAlt: "Neutral placeholder image — no licensed photograph selected for this story yet",
+    imageUrl: "/images/stories/congo-ebola-awareness-monusco.jpg",
+    imageAlt: "A UN peacekeeper taking part in an Ebola-awareness hand-washing campaign in Kinshasa, Democratic Republic of Congo (file photo, 2014, not a photo of the 2026 outbreak)",
+    imageSourceType: "licensed-contextual",
     whyWeChoseThis: "A major Ebola outbreak in Congo is a serious global health story that deserves attention beyond the biggest political headlines. It also gives learners important public-health vocabulary and background knowledge.",
     keyVocabulary: [
       "Ebola",

@@ -14,6 +14,7 @@ Status: pre-implementation. This document records technical-foundation decisions
   - **Secondary/sparse**: The Japan Times (real but only ~3 articles/month).
   - **Not reliably supplied by GDELT** (confirmed absent at both 7 and 30 days — not prohibited from the app, just not guaranteed discovery-pool members; see `EDITORIAL_POLICY.md` Section 6): Reuters, Associated Press, The Washington Post, Financial Times, Bloomberg, ABC News, France 24 English, Politico, Axios, The Economist.
   - If the reliable-core pool proves insufficient once scoring/selection is built, a secondary provider (e.g. GNews) can be added later — not needed for V1.
+- **Image selection policy**: real licensed image (preferably Wikimedia Commons) → contextual licensed image → AI-generated illustration fallback → temporary placeholder, in that priority order. Never a copyrighted publisher photograph merely because no reusable one is available. See `IMAGE_POLICY.md` for the full policy and `IMAGE_CREDITS.md` for the per-image record. The data model/UI (`NewsStory.imageSourceType`, the "AI-generated illustration" badge) are ready to distinguish all four tiers, but image selection/generation is not yet automated.
 - **Browser-side learner state**: `localStorage`, as specified in the blueprint (working glossary, session state).
 - **News data for initial development**: sample/mock news data, so early educational-product design and UI work are not dictated by a specific news provider's format or limitations.
 
