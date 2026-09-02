@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { mockNewsStories } from "@/data/mock-news-stories";
+import { findStoryById } from "@/data/editions";
 import { ReadingSupportPage } from "@/components/ReadingSupportPage";
 import styles from "./page.module.css";
 
@@ -8,7 +8,7 @@ export default async function StoryPage({
   params,
 }: PageProps<"/story/[id]">) {
   const { id } = await params;
-  const story = mockNewsStories.find((candidate) => candidate.id === id);
+  const story = findStoryById(id);
 
   if (!story) {
     notFound();

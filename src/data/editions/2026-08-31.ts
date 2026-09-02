@@ -1,19 +1,19 @@
 import type { NewsStory } from "@/types/news-story";
 
 /**
- * Real current news stories for this week's edition, selected automatically
- * by the GDELT + OpenAI pipeline (scripts/generate-real-edition.mjs)
- * following EDITORIAL_POLICY.md. Headlines, sources, URLs, and publication
- * dates are real; "why we chose this," background, vocabulary, and reading
- * prompts are original commentary written for learners, never copied from
- * the articles. Story images are real photographs sourced from Wikimedia
- * Commons under their stated free-reuse licenses (see IMAGE_CREDITS.md) —
- * not publisher photographs, and not necessarily photos of the exact 2026
- * event where noted in imageAlt. See TECHNICAL_DECISIONS.md for the
- * discovery/selection pipeline.
+ * Frozen edition: the first real weekly edition, originally generated into
+ * src/data/mock-news-stories.ts and now archived here unchanged. Headlines,
+ * sources, URLs, and publication dates are real; "why we chose this,"
+ * background, vocabulary, and reading prompts are original commentary
+ * written for learners, never copied from the articles. Story images are
+ * real photographs sourced from Wikimedia Commons under their stated
+ * free-reuse licenses (see IMAGE_CREDITS.md) — not publisher photographs,
+ * and not necessarily photos of the exact 2026 event where noted in
+ * imageAlt. See TECHNICAL_DECISIONS.md for the discovery/selection
+ * pipeline.
  * Generated: 2026-09-01T13:36:49.006Z
  */
-export const mockNewsStories: NewsStory[] = [
+export const stories: NewsStory[] = [
   {
     id: "story-2026-09-01-ive-never-been-to-afghanistan-six",
     headline: "I've never been to Afghanistan: Six million deportees forced to start over under the Taliban",
