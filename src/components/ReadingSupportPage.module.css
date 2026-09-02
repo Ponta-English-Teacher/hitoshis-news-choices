@@ -304,6 +304,14 @@
   margin: 0;
 }
 
+/* Wraps the AI answer text in a selectable region for Explain/Translate/
+   Listen without introducing an extra box — its children stay direct
+   participants in .chatAnswer's flex layout (gap, margins) exactly as
+   before. */
+.chatAnswerContent {
+  display: contents;
+}
+
 .chatAnswer ul {
   padding-left: 1.2rem;
 }

@@ -13,10 +13,26 @@ import { useRegisterSelectableScope } from "./selection-tools-context";
  * Do not wrap navigation, buttons, source/license metadata, or the external
  * publisher article.
  */
-export function SelectableRegion({ story, children }: { story: NewsStory; children: ReactNode }) {
+export function SelectableRegion({
+  story,
+  children,
+  className,
+}: {
+  story: NewsStory;
+  children: ReactNode;
+  /** Optional class for the wrapping div — e.g. `display: contents` when the
+   *  region sits inside a parent that lays out its own direct children
+   *  (such as a flex container) and the wrapper must not introduce an
+   *  extra box. */
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const context = useMemo(() => buildSelectionStoryContext(story), [story]);
   useRegisterSelectableScope(ref, context);
 
-  return <div ref={ref}>{children}</div>;
+  return (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  );
 }

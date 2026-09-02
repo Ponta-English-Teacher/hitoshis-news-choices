@@ -166,7 +166,9 @@ export function ReadingSupportPage({
                   </p>
                   <div className={styles.chatAnswer}>
                     <span className={styles.chatLabel}>AI:</span>
-                    {renderSimpleMarkdown(turn.answer)}
+                    <SelectableRegion story={story} className={styles.chatAnswerContent}>
+                      {renderSimpleMarkdown(turn.answer)}
+                    </SelectableRegion>
                   </div>
                 </div>
               ))}
