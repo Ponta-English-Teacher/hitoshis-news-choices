@@ -149,7 +149,7 @@ export function ReadingSupportPage({
             rel="noopener noreferrer"
             className={styles.primaryAction}
           >
-            Open Reuters Article →
+            Read the Original Article →
           </a>
         </section>
 
