@@ -1,6 +1,14 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from "react";
 import type { SelectionStoryContext } from "@/lib/selection-story-context";
 import { renderSimpleMarkdown } from "@/lib/simple-markdown";
 import { SelectionToolsContext } from "./selection-tools-context";
@@ -22,10 +30,37 @@ interface PanelState {
   loading: boolean;
   text: string | null;
   error: string | null;
+  /** The story context behind the current result, reused if the student
+   *  selects text inside the result panel itself (e.g. Explain again on a
+   *  word from the explanation) — same story, same grounding. */
+  context: SelectionStoryContext | null;
 }
 
-const INITIAL_PANEL: PanelState = { kind: null, loading: false, text: null, error: null };
+const INITIAL_PANEL: PanelState = { kind: null, loading: false, text: null, error: null, context: null };
+const RESULT_PANEL_SCOPE_ID = "selection-tools-result-panel";
 const TOOLBAR_GAP = 8;
+
+const DEFAULT_PANEL_WIDTH = 320;
+const MIN_PANEL_WIDTH = 260;
+const MIN_PANEL_HEIGHT = 160;
+const VIEWPORT_MARGIN = 40;
+const MIN_HEADER_VISIBLE = 80;
+
+interface DragState {
+  pointerId: number;
+  startX: number;
+  startY: number;
+  startTop: number;
+  startLeft: number;
+}
+
+interface ResizeState {
+  pointerId: number;
+  startX: number;
+  startY: number;
+  startWidth: number;
+  startHeight: number;
+}
 
 /**
  * Mount once per page (homepage, Reading Support). Provides Explain /
@@ -47,6 +82,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
   const scopesRef = useRef<Map<string, ScopeEntry>>(new Map());
   const toolbarRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const resultTextRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
   const requestIdRef = useRef(0);
@@ -58,6 +94,11 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
 
   const [panel, setPanel] = useState<PanelState>(INITIAL_PANEL);
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
+  const [panelWidth, setPanelWidth] = useState(DEFAULT_PANEL_WIDTH);
+  const [panelHeight, setPanelHeight] = useState<number | null>(null);
+
+  const dragStateRef = useRef<DragState | null>(null);
+  const resizeStateRef = useRef<ResizeState | null>(null);
 
   const registerScope = useCallback((id: string, el: HTMLElement, context: SelectionStoryContext) => {
     scopesRef.current.set(id, { el, context });
@@ -146,6 +187,20 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, [panel.kind, closePanel]);
 
+  // The result panel's own text is itself selectable content: register it
+  // as a scope (reusing the same story context the panel was opened with)
+  // so Explain/Translate/Listen work recursively on text inside a result,
+  // e.g. selecting "present perfect" inside an Explanation and explaining
+  // that too. Only the result text is registered — the heading and close
+  // button are deliberately left out of scope.
+  useEffect(() => {
+    if (!resultTextRef.current || !panel.context) return;
+    const el = resultTextRef.current;
+    const context = panel.context;
+    registerScope(RESULT_PANEL_SCOPE_ID, el, context);
+    return () => unregisterScope(RESULT_PANEL_SCOPE_ID);
+  }, [panel.text, panel.context, registerScope, unregisterScope]);
+
   function stopCurrentAudio() {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -164,7 +219,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     const myId = ++requestIdRef.current;
 
     setPanelPosition(anchor);
-    setPanel({ kind: "explain", loading: true, text: null, error: null });
+    setPanel({ kind: "explain", loading: true, text: null, error: null, context: snapshot.context });
 
     try {
       const res = await fetch("/api/ai-help", {
@@ -176,13 +231,13 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
       if (requestIdRef.current !== myId) return;
 
       if (data.ok) {
-        setPanel({ kind: "explain", loading: false, text: data.explanation ?? "", error: null });
+        setPanel({ kind: "explain", loading: false, text: data.explanation ?? "", error: null, context: snapshot.context });
       } else {
-        setPanel({ kind: "explain", loading: false, text: null, error: data.error ?? "Something went wrong." });
+        setPanel({ kind: "explain", loading: false, text: null, error: data.error ?? "Something went wrong.", context: snapshot.context });
       }
     } catch {
       if (requestIdRef.current !== myId) return;
-      setPanel({ kind: "explain", loading: false, text: null, error: "Couldn't reach the AI assistant. Please check your connection." });
+      setPanel({ kind: "explain", loading: false, text: null, error: "Couldn't reach the AI assistant. Please check your connection.", context: snapshot.context });
     }
   }
 
@@ -193,7 +248,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     const myId = ++requestIdRef.current;
 
     setPanelPosition(anchor);
-    setPanel({ kind: "translate", loading: true, text: null, error: null });
+    setPanel({ kind: "translate", loading: true, text: null, error: null, context: snapshot.context });
 
     try {
       const res = await fetch("/api/translate", {
@@ -205,13 +260,13 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
       if (requestIdRef.current !== myId) return;
 
       if (data.ok) {
-        setPanel({ kind: "translate", loading: false, text: data.translation ?? "", error: null });
+        setPanel({ kind: "translate", loading: false, text: data.translation ?? "", error: null, context: snapshot.context });
       } else {
-        setPanel({ kind: "translate", loading: false, text: null, error: data.error ?? "Something went wrong." });
+        setPanel({ kind: "translate", loading: false, text: null, error: data.error ?? "Something went wrong.", context: snapshot.context });
       }
     } catch {
       if (requestIdRef.current !== myId) return;
-      setPanel({ kind: "translate", loading: false, text: null, error: "Couldn't reach the translation service. Please check your connection." });
+      setPanel({ kind: "translate", loading: false, text: null, error: "Couldn't reach the translation service. Please check your connection.", context: snapshot.context });
     }
   }
 
@@ -256,6 +311,76 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Header drag: the header is the only drag surface (never the body text,
+  // so selecting text inside the result still works normally). Uses pointer
+  // capture so move/up are delivered to the header even once the pointer
+  // leaves it — no document-level listeners needed.
+  function handleHeaderPointerDown(e: ReactPointerEvent<HTMLDivElement>) {
+    if ((e.target as HTMLElement).closest("button")) return;
+    if (!panelPosition) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    dragStateRef.current = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      startTop: panelPosition.top,
+      startLeft: panelPosition.left,
+    };
+  }
+
+  function handleHeaderPointerMove(e: ReactPointerEvent<HTMLDivElement>) {
+    const drag = dragStateRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+
+    const deltaX = e.clientX - drag.startX;
+    const deltaY = e.clientY - drag.startY;
+
+    // Clamp so the header always stays reachable — never lose the panel
+    // entirely off-screen.
+    const top = Math.max(0, Math.min(drag.startTop + deltaY, window.innerHeight - MIN_HEADER_VISIBLE));
+    const left = Math.max(
+      MIN_HEADER_VISIBLE - panelWidth,
+      Math.min(drag.startLeft + deltaX, window.innerWidth - MIN_HEADER_VISIBLE)
+    );
+
+    setPanelPosition({ top, left });
+  }
+
+  function handleHeaderPointerUp(e: ReactPointerEvent<HTMLDivElement>) {
+    if (dragStateRef.current?.pointerId === e.pointerId) dragStateRef.current = null;
+  }
+
+  function handleResizePointerDown(e: ReactPointerEvent<HTMLDivElement>) {
+    if (!panelRef.current) return;
+    const rect = panelRef.current.getBoundingClientRect();
+    e.currentTarget.setPointerCapture(e.pointerId);
+    resizeStateRef.current = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      startWidth: rect.width,
+      startHeight: rect.height,
+    };
+  }
+
+  function handleResizePointerMove(e: ReactPointerEvent<HTMLDivElement>) {
+    const resize = resizeStateRef.current;
+    if (!resize || resize.pointerId !== e.pointerId) return;
+
+    const deltaX = e.clientX - resize.startX;
+    const deltaY = e.clientY - resize.startY;
+
+    const maxWidth = Math.max(MIN_PANEL_WIDTH, window.innerWidth - VIEWPORT_MARGIN);
+    const maxHeight = Math.max(MIN_PANEL_HEIGHT, window.innerHeight - VIEWPORT_MARGIN);
+
+    setPanelWidth(Math.min(maxWidth, Math.max(MIN_PANEL_WIDTH, resize.startWidth + deltaX)));
+    setPanelHeight(Math.min(maxHeight, Math.max(MIN_PANEL_HEIGHT, resize.startHeight + deltaY)));
+  }
+
+  function handleResizePointerUp(e: ReactPointerEvent<HTMLDivElement>) {
+    if (resizeStateRef.current?.pointerId === e.pointerId) resizeStateRef.current = null;
+  }
+
   const panelTitle = panel.kind === "explain" ? "Explanation" : panel.kind === "translate" ? "Translation" : null;
   const panelLoadingText = panel.kind === "explain" ? "Thinking…" : "Translating…";
 
@@ -291,16 +416,46 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
       )}
 
       {panelPosition && (panel.loading || panel.error || panel.text) && (
-        <div ref={panelRef} className={styles.resultPanel} style={{ top: panelPosition.top, left: panelPosition.left }}>
-          <div className={styles.resultHeader}>
+        <div
+          ref={panelRef}
+          className={styles.resultPanel}
+          style={{
+            top: panelPosition.top,
+            left: panelPosition.left,
+            width: panelWidth,
+            ...(panelHeight !== null ? { height: panelHeight } : {}),
+          }}
+        >
+          <div
+            className={styles.resultHeader}
+            onPointerDown={handleHeaderPointerDown}
+            onPointerMove={handleHeaderPointerMove}
+            onPointerUp={handleHeaderPointerUp}
+            onPointerCancel={handleHeaderPointerUp}
+          >
             {panelTitle && <p className={styles.resultTitle}>{panelTitle}</p>}
             <button type="button" onClick={closePanel} className={styles.resultClose} aria-label="Close">
               ×
             </button>
           </div>
-          {panel.loading && <p className={styles.resultIntro}>{panelLoadingText}</p>}
-          {panel.error && !panel.loading && <p className={styles.resultError}>{panel.error}</p>}
-          {panel.text && !panel.loading && <div className={styles.resultText}>{renderSimpleMarkdown(panel.text)}</div>}
+
+          <div className={`${styles.resultBody} ${panelHeight === null ? styles.resultBodyAuto : ""}`}>
+            {panel.loading && <p className={styles.resultIntro}>{panelLoadingText}</p>}
+            {panel.error && !panel.loading && <p className={styles.resultError}>{panel.error}</p>}
+            {panel.text && !panel.loading && (
+              <div ref={resultTextRef} className={styles.resultText}>
+                {renderSimpleMarkdown(panel.text)}
+              </div>
+            )}
+          </div>
+
+          <div
+            className={styles.resizeHandle}
+            onPointerDown={handleResizePointerDown}
+            onPointerMove={handleResizePointerMove}
+            onPointerUp={handleResizePointerUp}
+            onPointerCancel={handleResizePointerUp}
+          />
         </div>
       )}
     </SelectionToolsContext.Provider>
