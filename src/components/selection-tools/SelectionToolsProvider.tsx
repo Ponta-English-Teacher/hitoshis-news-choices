@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import type { SelectionStoryContext } from "@/lib/selection-story-context";
+import { renderSimpleMarkdown } from "@/lib/simple-markdown";
 import { SelectionToolsContext } from "./selection-tools-context";
 import styles from "./SelectionToolsProvider.module.css";
 
@@ -17,7 +18,7 @@ interface ActiveSelection {
 }
 
 interface PanelState {
-  kind: "explain" | "translate" | "listen" | null;
+  kind: "explain" | "translate" | null;
   loading: boolean;
   text: string | null;
   error: string | null;
@@ -33,12 +34,19 @@ const TOOLBAR_GAP = 8;
  * listener matched against the registered regions, so this scales to any
  * number of stories/sections without per-region listeners.
  *
+ * The floating toolbar is temporary (tied to the live text selection); the
+ * Explain/Translate result panel is deliberately independent of it once
+ * opened, so interacting with the panel itself (selecting/copying its
+ * text, clicking inside it) never closes it — only the close button or a
+ * genuine click outside the panel does.
+ *
  * Completely separate from AI Chat, which keeps its own local state in
  * ReadingSupportPage and is untouched by this provider.
  */
 export function SelectionToolsProvider({ children }: { children: ReactNode }) {
   const scopesRef = useRef<Map<string, ScopeEntry>>(new Map());
   const toolbarRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
   const requestIdRef = useRef(0);
@@ -46,7 +54,10 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
   const [selection, setSelection] = useState<ActiveSelection | null>(null);
   const [toolbarPosition, setToolbarPosition] = useState<{ top: number; left: number } | null>(null);
   const [toolbarHeight, setToolbarHeight] = useState(0);
+  const [listenError, setListenError] = useState<string | null>(null);
+
   const [panel, setPanel] = useState<PanelState>(INITIAL_PANEL);
+  const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
 
   const registerScope = useCallback((id: string, el: HTMLElement, context: SelectionStoryContext) => {
     scopesRef.current.set(id, { el, context });
@@ -113,6 +124,28 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     setToolbarPosition({ top, left });
   }, [selection]);
 
+  const closePanel = useCallback(() => {
+    setPanel(INITIAL_PANEL);
+    setPanelPosition(null);
+  }, []);
+
+  // Dismiss the panel on a genuine outside click only — never because the
+  // source text selection changed or was cleared, and never for a click or
+  // drag-select that lands inside the panel or on the toolbar itself.
+  useEffect(() => {
+    if (panel.kind === null) return;
+
+    function handleOutsideClick(e: MouseEvent) {
+      const target = e.target as Node;
+      if (panelRef.current?.contains(target)) return;
+      if (toolbarRef.current?.contains(target)) return;
+      closePanel();
+    }
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [panel.kind, closePanel]);
+
   function stopCurrentAudio() {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -125,10 +158,12 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
   }
 
   async function handleExplain() {
-    if (!selection) return;
+    if (!selection || !toolbarPosition) return;
     const snapshot = selection;
+    const anchor = { top: toolbarPosition.top + toolbarHeight + 6, left: toolbarPosition.left };
     const myId = ++requestIdRef.current;
 
+    setPanelPosition(anchor);
     setPanel({ kind: "explain", loading: true, text: null, error: null });
 
     try {
@@ -152,10 +187,12 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
   }
 
   async function handleTranslate() {
-    if (!selection) return;
+    if (!selection || !toolbarPosition) return;
     const snapshot = selection;
+    const anchor = { top: toolbarPosition.top + toolbarHeight + 6, left: toolbarPosition.left };
     const myId = ++requestIdRef.current;
 
+    setPanelPosition(anchor);
     setPanel({ kind: "translate", loading: true, text: null, error: null });
 
     try {
@@ -184,7 +221,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     const myId = ++requestIdRef.current;
 
     stopCurrentAudio();
-    setPanel(INITIAL_PANEL);
+    setListenError(null);
 
     try {
       const res = await fetch("/api/speech", {
@@ -196,7 +233,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
       if (!res.ok) {
         const data: { error?: string } = await res.json().catch(() => ({}));
         if (requestIdRef.current !== myId) return;
-        setPanel({ kind: "listen", loading: false, text: null, error: data.error ?? "Couldn't generate audio for this text." });
+        setListenError(data.error ?? "Couldn't generate audio for this text.");
         return;
       }
 
@@ -215,7 +252,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
       audio.play();
     } catch {
       if (requestIdRef.current !== myId) return;
-      setPanel({ kind: "listen", loading: false, text: null, error: "Couldn't reach the audio service. Please check your connection." });
+      setListenError("Couldn't reach the audio service. Please check your connection.");
     }
   }
 
@@ -244,15 +281,26 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      {selection && toolbarPosition && (panel.loading || panel.error || panel.text) && (
+      {selection && listenError && toolbarPosition && (
         <div
-          className={styles.resultPanel}
+          className={styles.listenErrorToast}
           style={{ top: toolbarPosition.top + toolbarHeight + 6, left: toolbarPosition.left }}
         >
-          {panelTitle && <p className={styles.resultTitle}>{panelTitle}</p>}
+          {listenError}
+        </div>
+      )}
+
+      {panelPosition && (panel.loading || panel.error || panel.text) && (
+        <div ref={panelRef} className={styles.resultPanel} style={{ top: panelPosition.top, left: panelPosition.left }}>
+          <div className={styles.resultHeader}>
+            {panelTitle && <p className={styles.resultTitle}>{panelTitle}</p>}
+            <button type="button" onClick={closePanel} className={styles.resultClose} aria-label="Close">
+              ×
+            </button>
+          </div>
           {panel.loading && <p className={styles.resultIntro}>{panelLoadingText}</p>}
           {panel.error && !panel.loading && <p className={styles.resultError}>{panel.error}</p>}
-          {panel.text && !panel.loading && <p className={styles.resultText}>{panel.text}</p>}
+          {panel.text && !panel.loading && <div className={styles.resultText}>{renderSimpleMarkdown(panel.text)}</div>}
         </div>
       )}
     </SelectionToolsContext.Provider>
