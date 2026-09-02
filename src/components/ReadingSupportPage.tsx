@@ -156,6 +156,9 @@ export function ReadingSupportPage({
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>AI Chat</h2>
           <p className={styles.promptsIntro}>Ask questions about this story or topic.</p>
+          <p className={styles.chatDisclaimer}>
+            AI responses may contain mistakes. Please check important information with reliable sources.
+          </p>
 
           {chatHistory.length > 0 && (
             <div className={styles.chatHistory}>
