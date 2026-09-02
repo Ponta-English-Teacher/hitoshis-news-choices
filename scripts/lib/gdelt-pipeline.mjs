@@ -181,7 +181,18 @@ function stripJsonFences(raw) {
   return raw.trim().replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "");
 }
 
-export async function selectSixStories(candidates, { model, policyPath }) {
+/**
+ * Shared wording for how the selection/classification prompts should treat
+ * a candidate or selected story that overlaps with an already-published
+ * story. Exported so scripts/lib/duplicate-check.mjs can reuse the exact
+ * same rule when it checks/repairs the final six after selection, without
+ * duplicate-check.mjs needing to import back into this module.
+ */
+export const DUPLICATE_AVOIDANCE_POLICY = `Do not select a story that covers the same underlying event as a previously published story, even if it comes from a different publisher, has a rewritten headline, or merely restates the same development with no new facts.
+
+A genuinely important FOLLOW-UP development about the same broader topic or ongoing situation MAY be selected, but only if it represents a materially new development that would justify a separate, new news story. For example: an earlier report that two countries "exchanged fire," followed later by one side "launching strikes," is a meaningful escalation and may be selected as a follow-up. But two articles about the exact same lawsuit, disaster, or announcement — merely reported by a different outlet or with a reworded headline — describe the same underlying event and must NOT both be selected.`;
+
+export async function selectSixStories(candidates, { model, policyPath, publishedContext }) {
   const policyText = fs.readFileSync(policyPath, "utf8");
 
   const idToCandidate = new Map();
@@ -191,10 +202,14 @@ export async function selectSixStories(candidates, { model, policyPath }) {
     return `${id} | ${c.source} | ${c.publicationDate} | ${c.title}`;
   });
 
+  const duplicateAvoidanceSection = publishedContext
+    ? `\nPREVIOUSLY PUBLISHED STORIES (P#) — from earlier editions of this app, already read by users. ${DUPLICATE_AVOIDANCE_POLICY}\n\n${publishedContext}\n`
+    : "";
+
   const instructions = `You are the editorial selection engine for Hitoshi's News Choices, an English-learning news app. Follow this editorial policy exactly:
 
 ${policyText}
-
+${duplicateAvoidanceSection}
 TASK: From the CANDIDATES list below, select exactly six (6) stories for this week's edition.
 
 Rules:
@@ -202,7 +217,11 @@ Rules:
 - Select purely on which six stories are genuinely the strongest according to the editorial policy above. Categories are labels you assign to each story AFTER you have chosen it — they are NOT slots that must each be filled. A category may receive zero, one, or several of the six stories; do not aim for one-per-category, and do not select a weaker story just to cover a category that would otherwise be empty.
 - "Asia Pickup" and "World Pickup" remain available for genuinely interesting discoveries, but neither is required to appear in this or any edition. Only use them when a story genuinely earns its place there.
 - Variety still matters: do not select multiple stories that are essentially about the same underlying event (e.g. two articles both primarily about the same disaster, court ruling, or summit). Different stories that happen to share a broad theme (e.g. two unrelated AI stories) are fine.
-- Do not try to reproduce the overall English-language media agenda. Do not reward a story merely because many publishers cover it — you are only seeing one representative per distinct story anyway.
+- Do not try to reproduce the overall English-language media agenda. Do not reward a story merely because many publishers cover it — you are only seeing one representative per distinct story anyway.${
+    publishedContext
+      ? `\n- Do not select a candidate that repeats the same underlying event as any story listed above under PREVIOUSLY PUBLISHED STORIES, unless it is a materially new follow-up development (see the duplicate-avoidance guidance above).`
+      : ""
+  }
 
 Reply with ONLY valid JSON (no markdown fences, no commentary), in this exact shape:
 {

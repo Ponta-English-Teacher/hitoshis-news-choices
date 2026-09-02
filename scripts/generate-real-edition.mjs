@@ -6,6 +6,17 @@
  * src/data/editions/index.ts — it never overwrites an existing edition
  * file or any other week's data.
  *
+ * Cross-edition duplicate prevention (see scripts/lib/duplicate-check.mjs):
+ * every candidate and every final selection is checked against ALL
+ * previously archived editions, not just the immediately previous one —
+ * first an exact URL/headline pre-filter (before selection, so obvious
+ * repeats never cost selection-model tokens), then a semantic/event
+ * duplicate classification on the final six (same event via a different
+ * publisher or a reworded headline is rejected; a materially new follow-up
+ * development is allowed). A rejected story is replaced from the remaining
+ * candidate pool and re-checked, up to a few attempts; if six duplicate-free
+ * stories cannot be produced, the script fails safely and writes nothing.
+ *
  * No article text is ever fetched — only headline/source/URL/date (from
  * GDELT) plus original commentary written by OpenAI from that metadata
  * alone, consistent with the copyright principle in AGENTS.md.
@@ -33,6 +44,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import OpenAI from "openai";
 import { discoverCandidates, selectSixStories, cleanupHeadlines } from "./lib/gdelt-pipeline.mjs";
+import {
+  loadPublishedStories,
+  filterExactDuplicateCandidates,
+  buildPublishedContextBlock,
+  resolveDuplicatesOrFail,
+} from "./lib/duplicate-check.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
@@ -232,17 +249,50 @@ async function main() {
     return;
   }
 
+  const publishedStories = loadPublishedStories(EDITIONS_DIR);
+  const publishedEditionDates = [...new Set(publishedStories.map((s) => s.editionDate))];
+  console.log(
+    `\nLoaded ${publishedStories.length} previously published stories from ${
+      publishedEditionDates.length ? publishedEditionDates.join(", ") : "no existing editions"
+    } for cross-edition duplicate checking.`
+  );
+
   const { finalCandidates, totalRaw } = await discoverCandidates({ lookbackDays: 7, maxRecordsPerSource: 50 });
 
-  console.log(`\nAsking ${SELECTION_MODEL} to select six stories from ${finalCandidates.length} candidates...\n`);
+  const { filtered: filteredCandidates, excluded: exactExcludedCandidates } = filterExactDuplicateCandidates(
+    finalCandidates,
+    publishedStories
+  );
+  console.log(
+    `Exact-duplicate pre-filter: excluded ${exactExcludedCandidates.length} of ${finalCandidates.length} candidates already published (by URL or headline); ${filteredCandidates.length} remain for selection.`
+  );
+
+  const publishedContext = buildPublishedContextBlock(publishedStories);
+
+  console.log(`\nAsking ${SELECTION_MODEL} to select six stories from ${filteredCandidates.length} candidates...\n`);
   const policyPath = path.join(PROJECT_ROOT, "EDITORIAL_POLICY.md");
-  const { selections: rawSelections, usage: selectionUsage } = await selectSixStories(finalCandidates, {
+  const { selections: rawSelections, usage: selectionUsage } = await selectSixStories(filteredCandidates, {
     model: SELECTION_MODEL,
     policyPath,
+    publishedContext,
   });
 
   console.log(`\nRunning conservative headline cleanup (${CLEANUP_MODEL})...\n`);
-  const { cleaned: selections, usage: cleanupUsage } = await cleanupHeadlines(rawSelections, { model: CLEANUP_MODEL });
+  const { cleaned: cleanedSelections, usage: cleanupUsage } = await cleanupHeadlines(rawSelections, {
+    model: CLEANUP_MODEL,
+  });
+
+  console.log(`\nRunning final cross-edition duplicate safety check...\n`);
+  const selections = await resolveDuplicatesOrFail({
+    selections: cleanedSelections,
+    filteredCandidates,
+    publishedStories,
+    publishedContext,
+    policyPath,
+    selectionModel: SELECTION_MODEL,
+    cleanupModel: CLEANUP_MODEL,
+  });
+  console.log(`\nDuplicate safety check passed: six distinct, non-duplicate stories confirmed.`);
 
   console.log(`\nGenerating Reading Support content (${SUPPORT_MODEL})...\n`);
   const { support, usage: supportUsage } = await generateSupportContent(selections);
@@ -323,6 +373,10 @@ export const stories: NewsStory[] = ${serialize(stories)};
         dateRangeLabel,
         totalRawCandidates: totalRaw,
         poolSize: finalCandidates.length,
+        publishedStoriesConsidered: publishedStories.length,
+        publishedEditionDates,
+        exactDuplicatesExcludedFromPool: exactExcludedCandidates.length,
+        poolSizeAfterExactDuplicateFilter: filteredCandidates.length,
         selectionModel: SELECTION_MODEL,
         cleanupModel: CLEANUP_MODEL,
         supportModel: SUPPORT_MODEL,
