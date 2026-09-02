@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { NewsStory } from "@/types/news-story";
+import { SelectableRegion } from "@/components/selection-tools/SelectableRegion";
 import styles from "./StoryCard.module.css";
 
 export function StoryCard({ story }: { story: NewsStory }) {
@@ -22,7 +23,9 @@ export function StoryCard({ story }: { story: NewsStory }) {
       <div className={styles.content}>
         <p className={styles.category}>{story.category}</p>
 
-        <h2 className={styles.headline}>{story.headline}</h2>
+        <SelectableRegion story={story}>
+          <h2 className={styles.headline}>{story.headline}</h2>
+        </SelectableRegion>
         <p className={styles.meta}>
           {story.sourceName} · {story.estimatedLevel} · About{" "}
           {story.estimatedReadingMinutes} min
@@ -57,12 +60,16 @@ export function StoryCard({ story }: { story: NewsStory }) {
 
         <div className={styles.whyBox}>
           <p className={styles.whyLabel}>Why Read This?</p>
-          <p className={styles.whyText}>{story.whyWeChoseThis}</p>
+          <SelectableRegion story={story}>
+            <p className={styles.whyText}>{story.whyWeChoseThis}</p>
+          </SelectableRegion>
         </div>
 
         <div className={styles.vocab}>
           <p className={styles.vocabLabel}>Key English</p>
-          <p className={styles.vocabList}>{story.keyVocabulary.join(" · ")}</p>
+          <SelectableRegion story={story}>
+            <p className={styles.vocabList}>{story.keyVocabulary.join(" · ")}</p>
+          </SelectableRegion>
         </div>
 
         <div className={styles.footer}>

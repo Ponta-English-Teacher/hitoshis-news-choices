@@ -1,0 +1,75 @@
+.selectionToolbar {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  padding: 0.25rem;
+}
+
+.selectionToolbar .toolbarButton + .toolbarButton {
+  border-left: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.selectionToolbar .toolbarButton:last-child {
+  border-radius: 0 999px 999px 0;
+}
+
+.toolbarButton {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--foreground);
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+}
+
+.toolbarButton:hover,
+.toolbarButton:focus-visible {
+  background: var(--accent-soft);
+  outline: none;
+}
+
+.resultPanel {
+  position: fixed;
+  z-index: 50;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.resultTitle {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.resultIntro {
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+}
+
+.resultError {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #b3261e;
+}
+
+.resultText {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--foreground);
+}
