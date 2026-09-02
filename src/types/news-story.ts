@@ -72,6 +72,9 @@ export interface NewsStory {
   knowledgeValueScore: EditorialScore;
   imageUrl: string;
   imageAlt: string;
+  /** The image file's actual pixel dimensions, so Reading Support can render it at its true aspect ratio without cropping/distortion. */
+  imageWidth: number;
+  imageHeight: number;
   imageSourceType: ImageSourceType;
   whyWeChoseThis: string;
   keyVocabulary: string[];

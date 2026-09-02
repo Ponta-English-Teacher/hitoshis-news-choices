@@ -41,6 +41,10 @@ export function ReadingSupportPage({
   const [error, setError] = useState<string | null>(null);
   const [listenError, setListenError] = useState<string | null>(null);
 
+  const [aiHelpLoading, setAiHelpLoading] = useState(false);
+  const [aiHelpAnswer, setAiHelpAnswer] = useState<string | null>(null);
+  const [aiHelpError, setAiHelpError] = useState<string | null>(null);
+
   const [chatHistory, setChatHistory] = useState<ChatTurn[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
@@ -144,6 +148,46 @@ export function ReadingSupportPage({
     }
   }
 
+  async function handleAIHelp() {
+    if (!selection) return;
+    const snapshot = selection;
+
+    setAiHelpLoading(true);
+    setAiHelpError(null);
+    setAiHelpAnswer(null);
+
+    try {
+      const res = await fetch("/api/ai-help", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: snapshot.text,
+          storyContext: {
+            headline: story.headline,
+            sourceName: story.sourceName,
+            category: story.category,
+            publicationDate: story.publicationDate,
+            whyWeChoseThis: story.whyWeChoseThis,
+            background: readingSupport.background,
+            vocabulary: readingSupport.vocabulary,
+            readingPrompts: readingSupport.readingPrompts,
+          },
+        }),
+      });
+      const data: { ok: boolean; explanation?: string; error?: string } = await res.json();
+
+      if (data.ok) {
+        setAiHelpAnswer(data.explanation ?? "");
+      } else {
+        setAiHelpError(data.error ?? "Something went wrong.");
+      }
+    } catch {
+      setAiHelpError("Couldn't reach the AI assistant. Please check your connection.");
+    } finally {
+      setAiHelpLoading(false);
+    }
+  }
+
   async function handleTranslate() {
     if (!selection) return;
     const snapshot = selection;
@@ -224,8 +268,9 @@ export function ReadingSupportPage({
           <Image
             src={story.imageUrl}
             alt={story.imageAlt}
-            fill
-            sizes="(max-width: 700px) 100vw, 700px"
+            width={story.imageWidth}
+            height={story.imageHeight}
+            sizes="(max-width: 559px) 100vw, 320px"
             className={styles.image}
           />
           {story.imageSourceType === "ai-generated" && (
@@ -249,6 +294,15 @@ export function ReadingSupportPage({
           <p className={styles.background}>{readingSupport.background}</p>
         </section>
       </div>
+
+      {(aiHelpLoading || aiHelpError || aiHelpAnswer) && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>AI Help</h2>
+          {aiHelpLoading && <p className={styles.promptsIntro}>Thinking&hellip;</p>}
+          {aiHelpError && !aiHelpLoading && <p className={styles.translationError}>{aiHelpError}</p>}
+          {aiHelpAnswer && !aiHelpLoading && <p className={styles.translationText}>{aiHelpAnswer}</p>}
+        </section>
+      )}
 
       {(loading || error || translation) && (
         <section className={styles.section}>
@@ -369,6 +423,14 @@ export function ReadingSupportPage({
           className={styles.selectionToolbar}
           style={toolbarPosition ? { top: toolbarPosition.top, left: toolbarPosition.left } : { top: -9999, left: -9999 }}
         >
+          <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={handleAIHelp}
+            className={styles.translateButton}
+          >
+            AI Help
+          </button>
           <button
             type="button"
             onMouseDown={(e) => e.preventDefault()}

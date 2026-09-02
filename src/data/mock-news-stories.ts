@@ -29,6 +29,8 @@ export const mockNewsStories: NewsStory[] = [
     knowledgeValueScore: 4,
     imageUrl: "/images/stories/afghan-refugee-camp-pakistan.jpg",
     imageAlt: "An Afghan refugee camp in Pakistan",
+    imageWidth: 1280,
+    imageHeight: 956,
     imageSourceType: "licensed-contextual",
     whyWeChoseThis: "This story gives a human view of a huge regional crisis: millions of Afghans being pushed into a country many barely know, now ruled by the Taliban. It is important, current, and useful for learning language around migration, identity, and political instability.",
     keyVocabulary: [
@@ -86,6 +88,8 @@ export const mockNewsStories: NewsStory[] = [
     knowledgeValueScore: 4,
     imageUrl: "/images/stories/nepal-tibet-flood-satellite.jpg",
     imageAlt: "Satellite image of the Nepal flash flood, captured by ESA's Copernicus Sentinel-2 mission in August 2026",
+    imageWidth: 1280,
+    imageHeight: 1600,
     imageSourceType: "licensed-real",
     whyWeChoseThis: "The Nepal-Tibet floods are one of the week’s deadliest disasters, with rescue efforts still unfolding. The story also helps readers connect extreme weather, mountain geography, and disaster response.",
     keyVocabulary: [
@@ -143,6 +147,8 @@ export const mockNewsStories: NewsStory[] = [
     knowledgeValueScore: 4,
     imageUrl: "/images/stories/us-navy-strait-of-hormuz.jpg",
     imageAlt: "A U.S. Navy carrier strike group transiting the Strait of Hormuz (file photo, 2023, not a photo of the 2026 incident)",
+    imageWidth: 1280,
+    imageHeight: 853,
     imageSourceType: "licensed-contextual",
     whyWeChoseThis: "A renewed exchange of fire between the U.S. and Iran is a major escalation with possible consequences for regional security and global energy markets. It is a concise way for learners to follow a fast-moving international conflict.",
     keyVocabulary: [
@@ -200,6 +206,8 @@ export const mockNewsStories: NewsStory[] = [
     knowledgeValueScore: 5,
     imageUrl: "/images/stories/amazon-fulfillment-center.jpg",
     imageAlt: "An Amazon fulfillment center in Shakopee, Minnesota",
+    imageWidth: 1280,
+    imageHeight: 854,
     imageSourceType: "licensed-contextual",
     whyWeChoseThis: "The Amazon lawsuit is a major business and consumer-protection story involving online advertising, state governments, and alleged hidden charges. It offers useful vocabulary for understanding regulation of large technology platforms.",
     keyVocabulary: [
@@ -257,6 +265,8 @@ export const mockNewsStories: NewsStory[] = [
     knowledgeValueScore: 4,
     imageUrl: "/images/stories/eu-berlaymont-building.jpg",
     imageAlt: "The Berlaymont building in Brussels, headquarters of the European Commission",
+    imageWidth: 1280,
+    imageHeight: 864,
     imageSourceType: "licensed-contextual",
     whyWeChoseThis: "ChatGPT facing tougher EU rules is a clear example of how governments are beginning to regulate powerful AI tools. The story is highly relevant for students because it connects technology they know with law, safety, and public policy.",
     keyVocabulary: [
@@ -314,6 +324,8 @@ export const mockNewsStories: NewsStory[] = [
     knowledgeValueScore: 5,
     imageUrl: "/images/stories/congo-ebola-awareness-monusco.jpg",
     imageAlt: "A UN peacekeeper taking part in an Ebola-awareness hand-washing campaign in Kinshasa, Democratic Republic of Congo (file photo, 2014, not a photo of the 2026 outbreak)",
+    imageWidth: 3648,
+    imageHeight: 2736,
     imageSourceType: "licensed-contextual",
     whyWeChoseThis: "A major Ebola outbreak in Congo is a serious global health story that deserves attention beyond the biggest political headlines. It also gives learners important public-health vocabulary and background knowledge.",
     keyVocabulary: [
