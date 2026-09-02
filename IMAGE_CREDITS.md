@@ -115,3 +115,65 @@ Each image was chosen for topical relevance to its story and license-verified vi
 ---
 
 **Note on images 7-12:** Downloaded via Wikimedia's `Special:FilePath` redirect at reduced width (1200px) where possible; `congo-ebola-awareness-monusco.jpg` and `nepal-tibet-flood-satellite.jpg` are stored at their original resolution because the reduced-width thumbnail redirect returned an error for those two files at download time — Next.js's built-in image optimizer resizes them for display regardless, so this has no functional effect, only a larger source file in the repo. All CC BY-SA entries require attribution and ShareAlike redistribution; the CC BY entry requires attribution only; the Public Domain entry requires none (credited here as a courtesy).
+
+## Second edition (2026-09-04, August 31 – September 2, 2026)
+
+Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority order (real event image → real contextual image → AI-generated illustration → placeholder), license-verified via the Wikimedia Commons API (`imageinfo`/`extmetadata`) before download. None depict the exact 2026 event described in their story — no freely reusable actual-event photograph existed for any of these six current-week stories at sourcing time — so all six are `licensed-contextual`. This is reflected honestly in each story's `imageAlt` text in `src/data/editions/2026-09-04.ts`.
+
+### 13. `iran-strait-us-navy-patrol.jpg`
+- **Story:** US launches strikes on Iran following attempted attacks in Strait (BBC)
+- **Commons filename:** `File:USS Tempest (PC 2) transits the Strait of Hormuz. (50679762106).jpg`
+- **Subject:** The U.S. Navy coastal patrol ship USS Tempest transiting the Strait of Hormuz (contextual — a December 2020 file photo, not a photo of the 2026 strikes)
+- **Photographer / creator:** U.S. Navy photo by Mass Communication Specialist 2nd Class Indra Beaufort
+- **Original file page:** https://commons.wikimedia.org/wiki/File:USS_Tempest_(PC_2)_transits_the_Strait_of_Hormuz._(50679762106).jpg
+- **License:** Public Domain (U.S. federal government work)
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "U.S. Navy photo by Indra Beaufort".
+
+### 14. `pyongyang-kim-il-sung-square.jpg`
+- **Story:** North Korea next ruler? Kim Jong-un daughter, Seoul spies say (South China Morning Post)
+- **Commons filename:** `File:Kim Il Sung Square, Pyongyang, North Korea.jpg`
+- **Subject:** Kim Il-sung Square, Pyongyang — the ceremonial center of North Korea's political leadership (contextual — deliberately NOT a photograph of Kim Jong-un's daughter, since no freely reusable image of her exists; a copyrighted press photo was not used, per IMAGE_POLICY.md and the quality bar for this story)
+- **Photographer / creator:** Kok Leng Yeo
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Kim_Il_Sung_Square,_Pyongyang,_North_Korea.jpg
+- **License:** CC BY 2.0 (Creative Commons Attribution 2.0 Generic)
+- **Attribution wording required:** "Kok Leng Yeo / Wikimedia Commons / CC BY 2.0"
+
+### 15. `climate-drought-cracked-earth.jpg`
+- **Story:** Global heating will hit at least 1.8C, UN warns, and there are no good outcome | Climate crisis (The Guardian)
+- **Commons filename:** `File:Drought in Morocco.jpg`
+- **Subject:** Cracked, drought-stricken earth in Morocco (contextual — illustrates the extreme heat/water stress linked to global heating described in the story, not a photo tied to the specific UN report)
+- **Photographer / creator:** Houssain tork
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Drought_in_Morocco.jpg
+- **License:** CC BY-SA 4.0 (Creative Commons Attribution-Share Alike 4.0)
+- **Attribution wording required:** "Houssain tork / Wikimedia Commons / CC BY-SA 4.0"
+
+### 16. `pentagon-building-aerial.jpg`
+- **Story:** Dan Driscoll: US Army secretary resigns after months of tension (BBC)
+- **Commons filename:** `File:The Pentagon US Department of Defense building.jpg`
+- **Subject:** Aerial view of the Pentagon, headquarters of the U.S. Department of Defense (contextual — a 1998 file photo, not a photo of Dan Driscoll; no freely reusable photo of Driscoll was found, so a relevant U.S. Army/Pentagon contextual image was used instead of a questionable press photo, per the quality bar for this story)
+- **Photographer / creator:** DoD photo by Master Sgt. Ken Hammond, U.S. Air Force
+- **Original file page:** https://commons.wikimedia.org/wiki/File:The_Pentagon_US_Department_of_Defense_building.jpg
+- **License:** Public Domain (U.S. federal government work)
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "DoD photo by Ken Hammond".
+
+### 17. `ai-cloud-datacenter-racks.jpg`
+- **Story:** Anthropic signs US$35 billion cloud deal with Nvidia-backed Lambda, source says (Channel News Asia)
+- **Commons filename:** `File:Datacenter Server Racks (22370909788).jpg`
+- **Subject:** Rows of server racks inside a data center (contextual — genuinely relevant to the cloud/AI-infrastructure subject matter of the story, chosen instead of a generic robot illustration per the quality bar for this story)
+- **Photographer / creator:** Carl Lender
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg
+- **License:** CC BY 2.0 (Creative Commons Attribution 2.0 Generic)
+- **Attribution wording required:** "Carl Lender / Wikimedia Commons / CC BY 2.0"
+
+### 18. `germany-drone-quadcopter.jpg`
+- **Story:** Germany blames Russia for airport drone plot, shuts down consulate (NBC News)
+- **Commons filename:** `File:DJI Phantom 4Pro 04-2017 img3 in flight.jpg`
+- **Subject:** A consumer quadcopter drone in flight, photographed in Berlin, Germany (contextual — genuinely relevant to both the "drone" and "Germany" elements of the story, chosen over generic war imagery per the quality bar for this story)
+- **Photographer / creator:** A.Savin
+- **Original file page:** https://commons.wikimedia.org/wiki/File:DJI_Phantom_4Pro_04-2017_img3_in_flight.jpg
+- **License:** Free Art License (FAL)
+- **Attribution wording required:** "A.Savin, Wikipedia"
+
+---
+
+**Note on images 13-18:** Downloaded via Wikimedia's `Special:FilePath` redirect at reduced width (1200px). Two (13, 16) are Public Domain U.S. federal government works requiring no attribution (credited here as a courtesy); two (14, 17) are CC BY 2.0, requiring attribution only; one (15) is CC BY-SA 4.0, requiring attribution and ShareAlike redistribution; one (18) is under the Free Art License, requiring attribution as specified on its file page.
