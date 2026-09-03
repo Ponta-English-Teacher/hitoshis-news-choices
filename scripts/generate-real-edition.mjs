@@ -21,22 +21,31 @@
  * GDELT) plus original commentary written by OpenAI from that metadata
  * alone, consistent with the copyright principle in AGENTS.md.
  *
- * Images are NOT sourced by this script (per IMAGE_POLICY.md, real image
- * selection is a human step) — every story is written with the shared
- * neutral placeholder and imageSourceType: "placeholder". Before treating
- * a generated edition as ready to publish, a human should replace each
- * story's placeholder with a real Wikimedia Commons image (or an
- * AI-generated illustration, per policy) and update IMAGE_CREDITS.md,
- * exactly as was done for the first edition.
+ * Images are sourced automatically (scripts/lib/edition-image-pipeline.mjs):
+ * Wikimedia Commons first (scripts/source-images.mjs, licensed-real or
+ * licensed-contextual per IMAGE_POLICY.md), an AI-generated illustration
+ * fallback (scripts/generate-ai-image.mjs) for any story Commons can't
+ * confidently supply. A successful run never leaves imageSourceType:
+ * "placeholder" — if a story ends up with neither a Commons image nor a
+ * working AI fallback, the whole run throws and writes nothing.
  *
  * Run manually (needs OPENAI_API_KEY from .env.local in the environment):
  *   set -a && source .env.local && set +a && node scripts/generate-real-edition.mjs
  *
  * Optional environment variables:
- *   EDITION_DATE=2026-09-04   Target edition key (defaults to today, UTC).
- *   ALLOW_OVERWRITE=1         Required to regenerate an edition that
- *                             already exists. Without it, the script
- *                             refuses to touch an existing edition file.
+ *   EDITION_DATE=2026-09-04     Target edition key (defaults to today, UTC).
+ *   ALLOW_OVERWRITE=1           Required to regenerate an edition that
+ *                               already exists. Without it, the script
+ *                               refuses to touch an existing edition file.
+ *   EDITION_OUTPUT_DIR=...      Override where the edition .ts file and
+ *                               registry (index.ts) are read/written
+ *                               (defaults to the real src/data/editions/).
+ *   IMAGE_OUTPUT_DIR=...        Override where final images are copied
+ *                               (defaults to the real public/images/stories/).
+ *   IMAGE_CREDITS_PATH=...      Override the credits file read/appended
+ *                               (defaults to the real IMAGE_CREDITS.md).
+ * These three overrides exist so a full end-to-end test run can be pointed
+ * entirely at a scratch location without ever touching real project files.
  */
 
 import fs from "node:fs";
@@ -50,23 +59,25 @@ import {
   buildPublishedContextBlock,
   resolveDuplicatesOrFail,
 } from "./lib/duplicate-check.mjs";
+import { sourceImagesForEdition, buildImageStoryFields, buildImageCreditEntry } from "./lib/edition-image-pipeline.mjs";
+import { nextCreditEntryNumber, appendCreditsSection } from "./lib/image-credits.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
-const EDITIONS_DIR = path.join(PROJECT_ROOT, "src", "data", "editions");
+const EDITIONS_DIR = process.env.EDITION_OUTPUT_DIR
+  ? path.resolve(process.env.EDITION_OUTPUT_DIR)
+  : path.join(PROJECT_ROOT, "src", "data", "editions");
 const EDITIONS_INDEX_PATH = path.join(EDITIONS_DIR, "index.ts");
+const IMAGE_OUTPUT_DIR = process.env.IMAGE_OUTPUT_DIR
+  ? path.resolve(process.env.IMAGE_OUTPUT_DIR)
+  : path.join(PROJECT_ROOT, "public", "images", "stories");
+const IMAGE_CREDITS_PATH = process.env.IMAGE_CREDITS_PATH
+  ? path.resolve(process.env.IMAGE_CREDITS_PATH)
+  : path.join(PROJECT_ROOT, "IMAGE_CREDITS.md");
 
 const SELECTION_MODEL = "gpt-5.5";
 const CLEANUP_MODEL = "gpt-5.4-mini";
 const SUPPORT_MODEL = "gpt-5.5"; // educational writing quality matters here
-
-const PLACEHOLDER_IMAGE = "/images/stories/placeholder.png";
-const PLACEHOLDER_ALT = "Neutral placeholder image — no licensed photograph selected for this story yet";
-// Matches the actual dimensions of public/images/stories/placeholder.png
-// (see scripts/generate-placeholder-image.mjs) so the type-required
-// imageWidth/imageHeight stay truthful even before a human picks a real photo.
-const PLACEHOLDER_WIDTH = 1200;
-const PLACEHOLDER_HEIGHT = 675;
 
 const EDITION_DATE = process.env.EDITION_DATE || new Date().toISOString().slice(0, 10);
 const ALLOW_OVERWRITE = process.env.ALLOW_OVERWRITE === "1";
@@ -297,12 +308,32 @@ async function main() {
   console.log(`\nGenerating Reading Support content (${SUPPORT_MODEL})...\n`);
   const { support, usage: supportUsage } = await generateSupportContent(selections);
 
+  console.log(`\nSourcing images for all six stories (Wikimedia Commons first, AI-generated illustration fallback if needed)...\n`);
+  const storiesForImageSourcing = selections.map((s) => ({
+    id: `story-${s.publicationDate}-${slugify(s.headline)}`,
+    headline: s.headline,
+    category: s.category,
+    whyWeChoseThis: s.whyWeChoseThis,
+    sourceName: s.source,
+  }));
+  const imageEntries = await sourceImagesForEdition({
+    storiesForImageSourcing,
+    editionDate: EDITION_DATE,
+    editionsDir: EDITIONS_DIR,
+    imageOutputDir: IMAGE_OUTPUT_DIR,
+    imageCreditsPath: IMAGE_CREDITS_PATH,
+  });
+  const commonsCount = imageEntries.filter((e) => e.kind === "commons").length;
+  const aiCount = imageEntries.filter((e) => e.kind === "ai").length;
+  console.log(`Image sourcing complete: ${commonsCount} from Wikimedia Commons, ${aiCount} AI-generated fallback.`);
+
   const stories = selections.map((s, i) => {
     const supportContent = support.find((x) => x.id === `H${i + 1}`);
     if (!supportContent) throw new Error(`Missing support content for H${i + 1}`);
+    const imageFields = buildImageStoryFields(imageEntries[i]);
 
     return {
-      id: `story-${s.publicationDate}-${slugify(s.headline)}`,
+      id: storiesForImageSourcing[i].id,
       headline: s.headline,
       sourceName: s.source,
       sourceUrl: s.url,
@@ -314,11 +345,7 @@ async function main() {
       significanceScore: supportContent.significanceScore,
       discussionValueScore: supportContent.discussionValueScore,
       knowledgeValueScore: supportContent.knowledgeValueScore,
-      imageUrl: PLACEHOLDER_IMAGE,
-      imageAlt: PLACEHOLDER_ALT,
-      imageWidth: PLACEHOLDER_WIDTH,
-      imageHeight: PLACEHOLDER_HEIGHT,
-      imageSourceType: "placeholder",
+      ...imageFields,
       whyWeChoseThis: s.whyWeChoseThis,
       keyVocabulary: supportContent.vocabulary.map((v) => v.term),
       readingMode: "authentic",
@@ -343,12 +370,10 @@ async function main() {
  * this," background, vocabulary, and reading prompts are original
  * commentary written for learners, never copied from the articles.
  *
- * IMAGES ARE PLACEHOLDERS: every story below still uses the shared neutral
- * placeholder (imageSourceType: "placeholder"). Per IMAGE_POLICY.md, a
- * human must replace each with a real Wikimedia Commons photo (or an
- * AI-generated illustration) and record it in IMAGE_CREDITS.md before this
- * edition is treated as ready to publish — exactly as was done for the
- * first edition.
+ * Images were sourced automatically per IMAGE_POLICY.md: Wikimedia Commons
+ * first (licensed-real or licensed-contextual), an AI-generated
+ * illustration fallback where no suitable licensed image was found — see
+ * IMAGE_CREDITS.md for the per-image record of every image below.
  * Generated: ${new Date().toISOString()}
  */
 export const stories: NewsStory[] = ${serialize(stories)};
@@ -360,7 +385,18 @@ export const stories: NewsStory[] = ${serialize(stories)};
 
   updateEditionsIndex({ date: EDITION_DATE, dateRangeLabel });
   console.log(`Registered edition ${EDITION_DATE} ("${dateRangeLabel}") in ${path.relative(PROJECT_ROOT, EDITIONS_INDEX_PATH)}`);
-  console.log(`\nREMINDER: images are still placeholders. Source real photos and update IMAGE_CREDITS.md before publishing this edition.`);
+
+  let creditNumber = nextCreditEntryNumber(IMAGE_CREDITS_PATH);
+  const creditEntries = imageEntries.map((entry, i) => {
+    const s = selections[i];
+    const number = creditNumber++;
+    return { number, localFilename: entry.filename, markdown: buildImageCreditEntry(entry, `${s.headline} (${s.source})`, number) };
+  });
+  const { appended } = appendCreditsSection(IMAGE_CREDITS_PATH, {
+    sectionHeading: `${dateRangeLabel} edition (${EDITION_DATE})`,
+    entries: creditEntries,
+  });
+  console.log(`Appended ${appended} new image credit entries to ${path.relative(PROJECT_ROOT, IMAGE_CREDITS_PATH)}`);
 
   const reportDir = path.join(PROJECT_ROOT, "scripts", "output");
   fs.mkdirSync(reportDir, { recursive: true });
@@ -383,6 +419,8 @@ export const stories: NewsStory[] = ${serialize(stories)};
         selectionUsage,
         cleanupUsage,
         supportUsage,
+        imagesFromCommons: commonsCount,
+        imagesAiGenerated: aiCount,
         stories,
       },
       null,

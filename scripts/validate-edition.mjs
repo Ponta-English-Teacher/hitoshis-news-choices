@@ -11,10 +11,16 @@
  * mechanical things: exact URL/headline duplicates, required fields,
  * unique ids, image presence, and registry consistency.
  *
- * Self-contained on purpose (no import from scripts/lib/*): it parses every
- * src/data/editions/*.ts file itself via the same plain-text-regex approach
- * already used elsewhere in scripts/, since Node can't import .ts files
- * directly here (no ts-node/tsx in this project).
+ * Self-contained by design (no import from scripts/lib/*), with one narrow
+ * exception: getImageDimensions() (scripts/lib/image-dimensions.mjs) is
+ * reused to cross-check recorded imageWidth/imageHeight against the actual
+ * downloaded file — a pure, deterministic, dependency-free binary parser
+ * with no network/OpenAI involvement, so reusing it keeps this validator's
+ * cost/determinism guarantees intact while avoiding a ~90-line duplicate
+ * of JPEG/PNG/WebP header parsing. Everything else parses every
+ * src/data/editions/*.ts file itself via the same plain-text-regex
+ * approach already used elsewhere in scripts/, since Node can't import
+ * .ts files directly here (no ts-node/tsx in this project).
  *
  * Usage:
  *   EDITION_DATE=2026-09-04 node scripts/validate-edition.mjs
@@ -23,11 +29,15 @@
  *   EDITIONS_DIR=/path/to/scratch/editions   Override the editions
  *     directory (defaults to the real src/data/editions/), for testing
  *     this validator against fixture files without touching real data.
+ *   PUBLIC_DIR=/path/to/scratch/public        Override the directory
+ *     imageUrl paths are resolved against (defaults to the real public/),
+ *     for checking image-file existence against a scratch image location.
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { getImageDimensions } from "./lib/image-dimensions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
@@ -35,6 +45,7 @@ const EDITIONS_DIR = process.env.EDITIONS_DIR
   ? path.resolve(process.env.EDITIONS_DIR)
   : path.join(PROJECT_ROOT, "src", "data", "editions");
 const INDEX_PATH = path.join(EDITIONS_DIR, "index.ts");
+const PUBLIC_DIR = process.env.PUBLIC_DIR ? path.resolve(process.env.PUBLIC_DIR) : path.join(PROJECT_ROOT, "public");
 
 const EDITION_DATE = process.env.EDITION_DATE;
 
@@ -275,9 +286,31 @@ async function main() {
     }
 
     if (typeof s.imageUrl === "string" && s.imageUrl.startsWith("/")) {
-      const filePath = path.join(PROJECT_ROOT, "public", s.imageUrl);
+      const filePath = path.join(PUBLIC_DIR, s.imageUrl);
       if (!fs.existsSync(filePath)) {
-        imageFailures.push(`${label}: image file does not exist: ${path.relative(PROJECT_ROOT, filePath)}`);
+        imageFailures.push(`${label}: image file does not exist: ${filePath}`);
+      } else {
+        // Cross-check recorded imageWidth/imageHeight against the actual
+        // file bytes — a source's reported thumbnail size can drift from
+        // what was actually served/downloaded (confirmed empirically:
+        // Wikimedia Commons' thumbwidth metadata does not always match the
+        // real served file), so trust the file over the metadata.
+        try {
+          const ext = path.extname(filePath).replace(".", "").toLowerCase();
+          const measured = getImageDimensions(fs.readFileSync(filePath), ext);
+          if (typeof s.imageWidth === "number" && measured.width !== s.imageWidth) {
+            imageFailures.push(
+              `${label}: imageWidth (${s.imageWidth}) does not match the actual file's width (${measured.width}).`
+            );
+          }
+          if (typeof s.imageHeight === "number" && measured.height !== s.imageHeight) {
+            imageFailures.push(
+              `${label}: imageHeight (${s.imageHeight}) does not match the actual file's height (${measured.height}).`
+            );
+          }
+        } catch (err) {
+          infoLines.push(`${label}: could not measure actual image dimensions (${err.message}) — skipped cross-check.`);
+        }
       }
     } else if (typeof s.imageUrl === "string" && s.imageUrl.length > 0) {
       infoLines.push(`${label}: imageUrl is external (${s.imageUrl}) — local file existence not applicable.`);
