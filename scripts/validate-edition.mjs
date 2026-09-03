@@ -362,6 +362,35 @@ async function main() {
   console.log(`Registry: ${registryOk ? "PASS" : "FAIL"}`);
   if (!registryOk) failures.push(...registryFailures);
 
+  // --- 5.5. Archive images: every OTHER edition file's images must still
+  // exist on disk. This is the direct safety net against the exact
+  // failure mode retention cleanup must never cause — a retained edition
+  // silently losing an image it still needs — but it's generically useful
+  // regardless of cause (any accidental image deletion), so it always
+  // runs, not just after retention. ---
+  const archiveImageFailures = [];
+  if (fs.existsSync(EDITIONS_DIR)) {
+    const otherEditionFiles = fs
+      .readdirSync(EDITIONS_DIR)
+      .filter((f) => f.endsWith(".ts") && f !== "index.ts" && f !== `${EDITION_DATE}.ts`);
+    for (const file of otherEditionFiles) {
+      const otherDate = file.replace(/\.ts$/, "");
+      const otherText = fs.readFileSync(path.join(EDITIONS_DIR, file), "utf8");
+      for (const m of otherText.matchAll(/imageUrl: "(\/images\/stories\/[^"]+)"/g)) {
+        const imageUrl = m[1];
+        const filePath = path.join(PUBLIC_DIR, imageUrl);
+        if (!fs.existsSync(filePath)) {
+          archiveImageFailures.push(
+            `${otherDate}: image file does not exist: ${filePath} (referenced by imageUrl "${imageUrl}")`
+          );
+        }
+      }
+    }
+  }
+  const archiveImagesOk = archiveImageFailures.length === 0;
+  console.log(`Archive images: ${archiveImagesOk ? "PASS" : "FAIL"}`);
+  if (!archiveImagesOk) failures.push(...archiveImageFailures);
+
   // --- 6. Exact duplicates against prior archived editions ---
   const dupFailures = [];
   const priorUrls = new Set();
@@ -416,7 +445,7 @@ async function main() {
     console.log(`  INFO: ${line}`);
   }
 
-  const allOk = storiesOk && fieldsOk && idsOk && imagesOk && registryOk && dupOk;
+  const allOk = storiesOk && fieldsOk && idsOk && imagesOk && registryOk && archiveImagesOk && dupOk;
 
   if (!allOk) {
     console.log("\nFAILURES:");

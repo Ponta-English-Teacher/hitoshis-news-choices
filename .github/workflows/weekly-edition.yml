@@ -93,11 +93,14 @@ jobs:
             exit 1
           fi
 
-      # The hard gate: generation -> validation -> lint -> build, in that
-      # order, stopping at the first failure (scripts/prepare-weekly-edition.mjs).
-      # This workflow does not reimplement any of that logic — it only
-      # trusts the orchestrator's exit code.
-      - name: Run publication-preparation gate (generate -> validate -> lint -> build)
+      # The hard gate: generation -> validation -> retention -> post-retention
+      # validation -> lint -> build, in that order, stopping at the first
+      # failure (scripts/prepare-weekly-edition.mjs). This workflow does not
+      # reimplement any of that logic — it only trusts the orchestrator's
+      # exit code. Retention never runs before the first validation has
+      # already confirmed the newly generated edition is sound, and a second
+      # validation pass runs immediately after retention, before lint/build.
+      - name: Run publication-preparation gate (generate -> validate -> retain -> validate -> lint -> build)
         env:
           EDITION_DATE: ${{ steps.resolve_date.outputs.edition_date }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -115,21 +118,80 @@ jobs:
             exit 1
           fi
 
+          # The Retention stage inside `npm run prepare:edition` always
+          # writes a precise manifest of exactly which old edition
+          # files/images it intentionally removed, even on a no-op run —
+          # its absence here means something is wrong; never guess.
+          MANIFEST="scripts/output/retention-report-${EDITION_DATE}.json"
+          if [ ! -f "$MANIFEST" ]; then
+            echo "::error::Retention manifest not found at $MANIFEST — refusing to commit without a precise record of what retention intentionally removed."
+            exit 1
+          fi
+          if ! command -v jq >/dev/null 2>&1; then
+            echo "::error::jq is required to read the retention manifest but is not available on this runner."
+            exit 1
+          fi
+
+          ALLOWED_REMOVED_EDITIONS="$(mktemp)"
+          ALLOWED_REMOVED_IMAGES="$(mktemp)"
+          jq -r '.removedEditionFiles[]' "$MANIFEST" > "$ALLOWED_REMOVED_EDITIONS"
+          jq -r '.removedImages[]' "$MANIFEST" > "$ALLOWED_REMOVED_IMAGES"
+
+          # Defense in depth: never trust the manifest's contents blindly.
+          # Every listed path must have exactly the expected shape, and the
+          # edition just published this run must never appear as removed.
+          while IFS= read -r p; do
+            [ -z "$p" ] && continue
+            if ! [[ "$p" =~ ^src/data/editions/[0-9]{4}-[0-9]{2}-[0-9]{2}\.ts$ ]]; then
+              echo "::error::Retention manifest lists an edition-file path with an unexpected shape: $p"
+              exit 1
+            fi
+            if [ "$p" = "$EDITION_FILE" ]; then
+              echo "::error::Retention manifest lists the edition just published ($EDITION_FILE) as removed — refusing."
+              exit 1
+            fi
+          done < "$ALLOWED_REMOVED_EDITIONS"
+          while IFS= read -r p; do
+            [ -z "$p" ] && continue
+            if ! [[ "$p" =~ ^public/images/stories/[^/]+$ ]]; then
+              echo "::error::Retention manifest lists an image path with an unexpected shape: $p"
+              exit 1
+            fi
+          done < "$ALLOWED_REMOVED_IMAGES"
+
           echo "Changed paths reported by git status:"
           git status --porcelain --untracked-files=all
 
           # Classify every changed/untracked path in the whole working tree.
           # Never `git add -A` — only ever stage paths we've explicitly
-          # recognized as an expected publication artifact.
+          # recognized as an expected publication artifact. A DELETION under
+          # src/data/editions/ or public/images/stories/ is only ever
+          # accepted when it exactly matches this run's retention manifest
+          # — never a blanket glob for deletions — so an unrelated or
+          # unintended deletion still aborts publication. Non-deletion
+          # changes under public/images/stories/ (this run's newly sourced
+          # images) keep their existing, already-proven behavior.
           UNEXPECTED=""
           while IFS= read -r line; do
             [ -z "$line" ] && continue
+            status="${line:0:2}"
             path="${line:3}"
             case "$path" in
               "$EDITION_FILE") ;;
               "src/data/editions/index.ts") ;;
               "IMAGE_CREDITS.md") ;;
-              public/images/stories/*) ;;
+              src/data/editions/*.ts)
+                if [[ "$status" == *D* ]] && grep -qxF -- "$path" "$ALLOWED_REMOVED_EDITIONS"; then
+                  :
+                else
+                  UNEXPECTED="${UNEXPECTED}${path}"$'\n'
+                fi
+                ;;
+              public/images/stories/*)
+                if [[ "$status" == *D* ]] && ! grep -qxF -- "$path" "$ALLOWED_REMOVED_IMAGES"; then
+                  UNEXPECTED="${UNEXPECTED}${path}"$'\n'
+                fi
+                ;;
               # Generation's own report JSON — a known, expected, but
               # never-committed byproduct (see scripts/output/ convention
               # throughout this project). Not staged below.
@@ -152,7 +214,12 @@ jobs:
             [ -z "$line" ] && continue
             path="${line:3}"
             git add "$path"
-          done < <(git status --porcelain --untracked-files=all public/images/stories/)
+          done < <(git status --porcelain --untracked-files=all -- src/data/editions/)
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            path="${line:3}"
+            git add "$path"
+          done < <(git status --porcelain --untracked-files=all -- public/images/stories/)
 
           if git diff --cached --quiet; then
             echo "::error::Nothing staged after a successful preparation run — refusing to publish an empty commit."

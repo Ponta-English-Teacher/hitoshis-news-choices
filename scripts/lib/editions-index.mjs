@@ -1,11 +1,15 @@
 /**
- * Rewrites src/data/editions/index.ts to register a new edition, keeping
- * the registry in strict newest-first date order regardless of the order
- * editions were generated in — a backfilled/older edition must never
- * become editions[0]/latestEdition just because it was generated most
- * recently. Extracted from scripts/generate-real-edition.mjs so it can be
- * unit-tested against a scratch index.ts without running the real
- * GDELT/OpenAI/image pipeline (see scripts/test-editions-index.mjs).
+ * Reads and rewrites src/data/editions/index.ts, keeping the registry in
+ * strict newest-first date order regardless of the order editions were
+ * added/removed in — a backfilled/older edition must never become
+ * editions[0]/latestEdition just because it was generated most recently,
+ * and removing an old edition must never disturb the order of the ones
+ * that remain. Extracted from scripts/generate-real-edition.mjs so it can
+ * be unit-tested against a scratch index.ts without running the real
+ * GDELT/OpenAI/image pipeline (see scripts/test-editions-index.mjs and
+ * scripts/test-retention.mjs, which reuses parseExistingEntries()/
+ * removeEditionsFromIndex() rather than re-implementing a second,
+ * potentially-inconsistent parser/writer for this same file shape).
  */
 
 import fs from "node:fs";
@@ -19,28 +23,17 @@ function byDateDescending(a, b) {
   return 0;
 }
 
-export function updateEditionsIndex(editionsIndexPath, newEntry) {
-  const existingText = fs.readFileSync(editionsIndexPath, "utf8");
-
-  const existingEntries = [...existingText.matchAll(ENTRY_PATTERN)].map((m) => ({
+/** Parses the `editions` array entries out of an existing index.ts's text. */
+export function parseExistingEntries(indexText) {
+  return [...indexText.matchAll(ENTRY_PATTERN)].map((m) => ({
     date: m[1],
     dateRangeLabelLiteral: m[2],
     varName: m[3],
   }));
+}
 
-  if (existingEntries.some((e) => e.date === newEntry.date)) {
-    throw new Error(
-      `Edition ${newEntry.date} is already present in editions/index.ts — this should have been caught earlier.`
-    );
-  }
-
-  const newVarName = `stories_${newEntry.date.replace(/-/g, "_")}`;
-  const allEntries = [
-    { date: newEntry.date, dateRangeLabelLiteral: JSON.stringify(newEntry.dateRangeLabel), varName: newVarName },
-    ...existingEntries,
-  ];
-  allEntries.sort(byDateDescending);
-
+/** Renders a full index.ts file from a list of {date, dateRangeLabelLiteral, varName} entries. */
+export function serializeIndexFile(allEntries) {
   const importLines = allEntries
     .map((e) => `import { stories as ${e.varName} } from "./${e.date}";`)
     .join("\n");
@@ -48,7 +41,7 @@ export function updateEditionsIndex(editionsIndexPath, newEntry) {
     .map((e) => `  { date: "${e.date}", dateRangeLabel: ${e.dateRangeLabelLiteral}, stories: ${e.varName} },`)
     .join("\n");
 
-  const fileContent = `import type { NewsStory } from "@/types/news-story";
+  return `import type { NewsStory } from "@/types/news-story";
 ${importLines}
 
 export interface EditionMeta {
@@ -84,6 +77,53 @@ export function findStoryById(id: string): NewsStory | undefined {
   return undefined;
 }
 `;
+}
 
-  fs.writeFileSync(editionsIndexPath, fileContent);
+function writeIndexFile(indexPath, allEntries) {
+  fs.writeFileSync(indexPath, serializeIndexFile(allEntries));
+}
+
+export function updateEditionsIndex(editionsIndexPath, newEntry) {
+  const existingText = fs.readFileSync(editionsIndexPath, "utf8");
+  const existingEntries = parseExistingEntries(existingText);
+
+  if (existingEntries.some((e) => e.date === newEntry.date)) {
+    throw new Error(
+      `Edition ${newEntry.date} is already present in editions/index.ts — this should have been caught earlier.`
+    );
+  }
+
+  const newVarName = `stories_${newEntry.date.replace(/-/g, "_")}`;
+  const allEntries = [
+    { date: newEntry.date, dateRangeLabelLiteral: JSON.stringify(newEntry.dateRangeLabel), varName: newVarName },
+    ...existingEntries,
+  ];
+  allEntries.sort(byDateDescending);
+
+  writeIndexFile(editionsIndexPath, allEntries);
+}
+
+/**
+ * Removes the entries for `datesToRemove` from index.ts, re-emitting the
+ * file via the same serializeIndexFile() template updateEditionsIndex()
+ * uses — never a second, divergent writer. Refuses (throws, writes
+ * nothing) if the removal would leave the registry empty, as a second,
+ * independent layer of the "never remove every edition" guarantee on top
+ * of scripts/lib/retention.mjs's own plan-level check.
+ */
+export function removeEditionsFromIndex(editionsIndexPath, datesToRemove) {
+  const existingText = fs.readFileSync(editionsIndexPath, "utf8");
+  const existingEntries = parseExistingEntries(existingText);
+
+  const removeSet = new Set(datesToRemove);
+  const remaining = existingEntries.filter((e) => !removeSet.has(e.date));
+
+  if (remaining.length === 0) {
+    throw new Error("removeEditionsFromIndex: refusing to remove every entry from the registry.");
+  }
+
+  remaining.sort(byDateDescending);
+  writeIndexFile(editionsIndexPath, remaining);
+
+  return { removedCount: existingEntries.length - remaining.length, remainingDates: remaining.map((e) => e.date) };
 }
