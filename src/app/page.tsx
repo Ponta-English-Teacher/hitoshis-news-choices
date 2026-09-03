@@ -14,9 +14,19 @@ export default function Home() {
           <p className={styles.subtitle}>
             Meaningful stories selected for English learning.
           </p>
-          <Link href="/editions" className={styles.editionsLink}>
-            Previous editions →
-          </Link>
+          <div className={styles.links}>
+            <Link href="/editions" className={styles.editionsLink}>
+              Previous editions →
+            </Link>
+            <a
+              href="/Hitoshis_News_Choices_User_Guide_Bilingual.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.editionsLink}
+            >
+              User Guide / ユーザーガイド →
+            </a>
+          </div>
         </header>
 
         <section
