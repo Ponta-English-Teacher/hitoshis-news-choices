@@ -1,0 +1,103 @@
+.disclosure {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.summary {
+  cursor: pointer;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.summary:hover {
+  color: var(--accent);
+}
+
+.nav {
+  border-top: 1px solid var(--border);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+  padding: 0.6rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.3;
+  color: var(--muted-foreground);
+}
+
+.item:hover {
+  background: var(--accent-soft);
+}
+
+.itemSelected {
+  background: var(--accent-soft);
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.currentBadge {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+/* Desktop: read as a plain, sticky, visually-secondary sidebar rather than
+   a collapsible control. The element is already rendered `open` (see
+   EditionsSidebar.tsx), so the list is always present here — this just
+   removes the summary's toggle affordance so it reads as a small section
+   label instead of a clickable control. */
+@media (min-width: 900px) {
+  .disclosure {
+    width: 230px;
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    position: sticky;
+    top: 2.5rem;
+  }
+
+  .summary {
+    padding: 0 0 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted-foreground);
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary::marker {
+    content: "";
+  }
+
+  .nav {
+    border-top: none;
+  }
+
+  .list {
+    padding: 0;
+  }
+}
