@@ -177,3 +177,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 ---
 
 **Note on images 13-18:** Downloaded via Wikimedia's `Special:FilePath` redirect at reduced width (1200px). Two (13, 16) are Public Domain U.S. federal government works requiring no attribution (credited here as a courtesy); two (14, 17) are CC BY 2.0, requiring attribution only; one (15) is CC BY-SA 4.0, requiring attribution and ShareAlike redistribution; one (18) is under the Free Art License, requiring attribution as specified on its file page.
+
+## August 29, 2026 – September 2, 2026 edition (2026-09-03)
+
+### 19. `story-2026-09-02-federal-judge.jpg`
+- **Story:** Federal judge blocks Trump's newest attempt to crack down on birthright citizenship (CNN)
+- **Subject:** US Supreme Court
+- **Photographer / creator:** Photo by Mr. Kjetil Ree.
+- **Original file page:** https://commons.wikimedia.org/wiki/File:US_Supreme_Court.JPG
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "Photo by Mr. Kjetil Ree. / Wikimedia Commons / CC BY-SA 3.0"
+
+### 20. `story-2026-09-02-google-defeats.jpg`
+- **Story:** Google defeats U.S. bid to force ad tech sale (CNBC)
+- **Subject:** El car on the roof of the Google office in Chicago
+- **Photographer / creator:** Grendelkhan
+- **Original file page:** https://commons.wikimedia.org/wiki/File:El_car_on_the_roof_of_the_Google_office_in_Chicago.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Grendelkhan / Wikimedia Commons / CC BY-SA 4.0"
+
+### 21. `story-2026-09-02-global-bond.jpg`
+- **Story:** Global bond rout gathers pace as inflation fears mount (CNBC)
+- **Subject:** New York Stock Exchange August 2017 04
+- **Photographer / creator:** Arild Vågen
+- **Original file page:** https://commons.wikimedia.org/wiki/File:New_York_Stock_Exchange_August_2017_04.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Arild Vågen / Wikimedia Commons / CC BY-SA 4.0"
+
+### 22. `story-2026-09-01-u-n.jpg`
+- **Story:** U.N. World Food Programme slashes West Bank aid, Gaza faces new cuts (NBC News)
+- **Subject:** WFP World Food Programme sack Gaza strip
+- **Photographer / creator:** Eliran t
+- **Original file page:** https://commons.wikimedia.org/wiki/File:WFP_World_Food_Programme_sack_Gaza_strip.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Eliran t / Wikimedia Commons / CC BY-SA 4.0"
+
+### 23. `story-2026-08-29-trump-says.jpg`
+- **Story:** Trump says U.S. has entered deal with Venezuela to take control of 65 billion barrels of oil reserves (NPR)
+- **Subject:** Anacortes Refinery 31911
+- **Photographer / creator:** Walter Siegmund (talk)
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Anacortes_Refinery_31911.JPG
+- **License:** Creative Commons Attribution 2.5
+- **Attribution wording required:** "Walter Siegmund (talk) / Wikimedia Commons / CC BY 2.5"
+
+### 24. `story-2026-09-02-hong-kong.jpg`
+- **Story:** Hong Kong activist Joshua Wong pleads guilty to collusion (DW)
+- **Subject:** HK NothKowloonMagistracy
+- **Photographer / creator:** Chong Fat
+- **Original file page:** https://commons.wikimedia.org/wiki/File:HK_NothKowloonMagistracy.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Chong Fat".
+
+---
