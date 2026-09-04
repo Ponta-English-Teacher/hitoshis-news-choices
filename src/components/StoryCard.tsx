@@ -12,7 +12,7 @@ export function StoryCard({ story }: { story: NewsStory }) {
           src={story.imageUrl}
           alt={story.imageAlt}
           fill
-          sizes="(max-width: 700px) 100vw, 520px"
+          sizes="(max-width: 700px) 110px, 180px"
           className={styles.image}
         />
         {story.imageSourceType === "ai-generated" && (
@@ -20,7 +20,7 @@ export function StoryCard({ story }: { story: NewsStory }) {
         )}
       </div>
 
-      <div className={styles.content}>
+      <div className={styles.summary}>
         <p className={styles.category}>{story.category}</p>
 
         <SelectableRegion story={story}>
@@ -30,7 +30,9 @@ export function StoryCard({ story }: { story: NewsStory }) {
           {story.sourceName} · {story.estimatedLevel} · About{" "}
           {story.estimatedReadingMinutes} min
         </p>
+      </div>
 
+      <div className={styles.details}>
         <div className={styles.indicators}>
           <div className={styles.indicator}>
             <span className={styles.indicatorScore}>
