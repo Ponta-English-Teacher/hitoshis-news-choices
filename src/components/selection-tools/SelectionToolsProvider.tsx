@@ -26,6 +26,10 @@ interface ActiveSelection {
 }
 
 interface PanelState {
+  /** Unique per push — lets an in-flight request find (and only update)
+   *  its own stack entry, even if the user has since pushed further
+   *  entries on top or popped back past it. */
+  id: number;
   kind: "explain" | "translate" | null;
   loading: boolean;
   text: string | null;
@@ -36,7 +40,7 @@ interface PanelState {
   context: SelectionStoryContext | null;
 }
 
-const INITIAL_PANEL: PanelState = { kind: null, loading: false, text: null, error: null, context: null };
+const INITIAL_PANEL: PanelState = { id: 0, kind: null, loading: false, text: null, error: null, context: null };
 const RESULT_PANEL_SCOPE_ID = "selection-tools-result-panel";
 const TOOLBAR_GAP = 8;
 
@@ -92,7 +96,15 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
   const [toolbarHeight, setToolbarHeight] = useState(0);
   const [listenError, setListenError] = useState<string | null>(null);
 
-  const [panel, setPanel] = useState<PanelState>(INITIAL_PANEL);
+  // A stack, not a single value: opening a result while another is already
+  // showing (e.g. selecting "rein" inside an open Explanation and hitting
+  // Explain again) pushes a new entry rather than overwriting the current
+  // one, so closing steps back to the previous result instead of jumping
+  // straight to the underlying page. `panel` is always the top of the
+  // stack (or INITIAL_PANEL when nothing is open) — every render/effect
+  // below reads `panel` exactly as before this was introduced.
+  const [panelStack, setPanelStack] = useState<PanelState[]>([]);
+  const panel = panelStack.length > 0 ? panelStack[panelStack.length - 1] : INITIAL_PANEL;
   const [panelPosition, setPanelPosition] = useState<{ top: number; left: number } | null>(null);
   const [panelWidth, setPanelWidth] = useState(DEFAULT_PANEL_WIDTH);
   const [panelHeight, setPanelHeight] = useState<number | null>(null);
@@ -165,9 +177,12 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     setToolbarPosition({ top, left });
   }, [selection]);
 
+  // Steps back one level: if a previous result exists underneath, it
+  // reappears in the same panel frame; only when the stack is empty does
+  // this return to the underlying page (the panel simply stops rendering,
+  // since `panel` then resolves to INITIAL_PANEL).
   const closePanel = useCallback(() => {
-    setPanel(INITIAL_PANEL);
-    setPanelPosition(null);
+    setPanelStack((prev) => prev.slice(0, -1));
   }, []);
 
   // Dismiss the panel on a genuine outside click only — never because the
@@ -212,6 +227,21 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Replaces whichever stack entry still has this id with `patch` — a
+  // no-op if the user has since popped past it (closed it, or closed
+  // everything above it back down past it), so a slow/stale response can
+  // never resurrect or clobber an entry the user already navigated away
+  // from.
+  function updatePanelEntry(id: number, patch: Omit<PanelState, "id">) {
+    setPanelStack((prev) => {
+      const index = prev.findIndex((entry) => entry.id === id);
+      if (index === -1) return prev;
+      const next = [...prev];
+      next[index] = { id, ...patch };
+      return next;
+    });
+  }
+
   async function handleExplain() {
     if (!selection || !toolbarPosition) return;
     const snapshot = selection;
@@ -219,7 +249,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     const myId = ++requestIdRef.current;
 
     setPanelPosition(anchor);
-    setPanel({ kind: "explain", loading: true, text: null, error: null, context: snapshot.context });
+    setPanelStack((prev) => [...prev, { id: myId, kind: "explain", loading: true, text: null, error: null, context: snapshot.context }]);
 
     try {
       const res = await fetch("/api/ai-help", {
@@ -228,16 +258,14 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ text: snapshot.text, storyContext: snapshot.context }),
       });
       const data: { ok: boolean; explanation?: string; error?: string } = await res.json();
-      if (requestIdRef.current !== myId) return;
 
       if (data.ok) {
-        setPanel({ kind: "explain", loading: false, text: data.explanation ?? "", error: null, context: snapshot.context });
+        updatePanelEntry(myId, { kind: "explain", loading: false, text: data.explanation ?? "", error: null, context: snapshot.context });
       } else {
-        setPanel({ kind: "explain", loading: false, text: null, error: data.error ?? "Something went wrong.", context: snapshot.context });
+        updatePanelEntry(myId, { kind: "explain", loading: false, text: null, error: data.error ?? "Something went wrong.", context: snapshot.context });
       }
     } catch {
-      if (requestIdRef.current !== myId) return;
-      setPanel({ kind: "explain", loading: false, text: null, error: "Couldn't reach the AI assistant. Please check your connection.", context: snapshot.context });
+      updatePanelEntry(myId, { kind: "explain", loading: false, text: null, error: "Couldn't reach the AI assistant. Please check your connection.", context: snapshot.context });
     }
   }
 
@@ -248,7 +276,7 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
     const myId = ++requestIdRef.current;
 
     setPanelPosition(anchor);
-    setPanel({ kind: "translate", loading: true, text: null, error: null, context: snapshot.context });
+    setPanelStack((prev) => [...prev, { id: myId, kind: "translate", loading: true, text: null, error: null, context: snapshot.context }]);
 
     try {
       const res = await fetch("/api/translate", {
@@ -257,16 +285,14 @@ export function SelectionToolsProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ text: snapshot.text }),
       });
       const data: { ok: boolean; translation?: string; error?: string } = await res.json();
-      if (requestIdRef.current !== myId) return;
 
       if (data.ok) {
-        setPanel({ kind: "translate", loading: false, text: data.translation ?? "", error: null, context: snapshot.context });
+        updatePanelEntry(myId, { kind: "translate", loading: false, text: data.translation ?? "", error: null, context: snapshot.context });
       } else {
-        setPanel({ kind: "translate", loading: false, text: null, error: data.error ?? "Something went wrong.", context: snapshot.context });
+        updatePanelEntry(myId, { kind: "translate", loading: false, text: null, error: data.error ?? "Something went wrong.", context: snapshot.context });
       }
     } catch {
-      if (requestIdRef.current !== myId) return;
-      setPanel({ kind: "translate", loading: false, text: null, error: "Couldn't reach the translation service. Please check your connection.", context: snapshot.context });
+      updatePanelEntry(myId, { kind: "translate", loading: false, text: null, error: "Couldn't reach the translation service. Please check your connection.", context: snapshot.context });
     }
   }
 
