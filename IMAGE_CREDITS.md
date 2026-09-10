@@ -229,3 +229,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** None (public domain). Credited here as a courtesy: "Chong Fat".
 
 ---
+
+## September 9, 2026 – September 10, 2026 edition (2026-09-11)
+
+### 25. `story-2026-09-10-yemen-houthis.jpg`
+- **Story:** Yemen Houthis seize port city Mocha, closing in on control of Bab el-Mandeb Strait (South China Morning Post)
+- **Subject:** Bab-el-Mandeb Strait, Africa-Arabia (ASTER)
+- **Photographer / creator:** NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Bab-el-Mandeb_Strait,_Africa-Arabia_(ASTER).jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team".
+
+### 26. `story-2026-09-10-supreme-court.jpg`
+- **Story:** Supreme Court blocks Missouri attempt to use newly drawn Republican congressional map (NBC News)
+- **Subject:** US Supreme Court - corrected
+- **Photographer / creator:** Jarek Tuszyński
+- **Original file page:** https://commons.wikimedia.org/wiki/File:US_Supreme_Court_-_corrected.jpg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "Jarek Tuszyński / Wikimedia Commons / CC BY-SA 3.0"
+
+### 27. `story-2026-09-10-anthropic-state.jpg`
+- **Story:** Anthropic: state-linked scientists from banned regions used Claude for virus research (NBC News)
+- **Subject:** V20230504LJ-0199-2
+- **Photographer / creator:** The White House
+- **Original file page:** https://commons.wikimedia.org/wiki/File:V20230504LJ-0199-2.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "The White House".
+
+### 28. `story-2026-09-10-suspected-measles.jpg`
+- **Story:** Suspected measles cases kill nearly 1,000 as Bangladesh struggles to contain outbreak (NBC News)
+- **Subject:** Infectious Diseases Hospital, Rajshahi 18
+- **Photographer / creator:** Nahid Hossain
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Infectious_Diseases_Hospital,_Rajshahi_18.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Nahid Hossain / Wikimedia Commons / CC BY-SA 4.0"
+
+### 29. `story-2026-09-09-trump-hits.jpg`
+- **Story:** Trump hits Canada with import bans, 50% tariffs (DW)
+- **Subject:** Wild Horse Border Crossing
+- **Photographer / creator:** Qwexcxewq
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Wild_Horse_Border_Crossing.jpg
+- **License:** Creative Commons Attribution 4.0
+- **Attribution wording required:** "Qwexcxewq / Wikimedia Commons / CC BY 4.0"
+
+### 30. `story-2026-09-10-global-heat.jpg`
+- **Story:** Global heat stuck on high: August was Earth hottest month on record, scientists say (NBC News)
+- **Subject:** Weather Station USDA
+- **Photographer / creator:** USDA photo by Scott Bauer. Image Number K7688-7
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Weather_Station_USDA.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "USDA photo by Scott Bauer. Image Number K7688-7".
+
+---
