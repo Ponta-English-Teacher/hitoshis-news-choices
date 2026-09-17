@@ -281,3 +281,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** None (public domain). Credited here as a courtesy: "USDA photo by Scott Bauer. Image Number K7688-7".
 
 ---
+
+## September 11, 2026 – September 13, 2026 edition (2026-09-18)
+
+### 31. `story-2026-09-11-hong-kong.jpg`
+- **Story:** Hong Kong Tiananmen activists sentenced to up to seven years in prison (BBC)
+- **Subject:** North Kowloon Magistracy No 1 Court
+- **Photographer / creator:** Wing1990hk
+- **Original file page:** https://commons.wikimedia.org/wiki/File:North_Kowloon_Magistracy_No_1_Court.jpg
+- **License:** Creative Commons Attribution 3.0
+- **Attribution wording required:** "Wing1990hk / Wikimedia Commons / CC BY 3.0"
+
+### 32. `story-2026-09-11-california-enacts.jpg`
+- **Story:** California enacts new curbs on social media for children (NBC News)
+- **Subject:** Blue hour front view of California State Capitol dllu 2018
+- **Photographer / creator:** Dllu
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Blue_hour_front_view_of_California_State_Capitol_dllu_2018.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Dllu / Wikimedia Commons / CC BY-SA 4.0"
+
+### 33. `story-2026-09-11-ai-firm.jpg`
+- **Story:** AI firm Anthropic says it disrupted election manipulation operation targeting voters in Malaysia (Channel News Asia)
+- **Subject:** Floral clock at Parliament of Malaysia (Landscape)
+- **Photographer / creator:** Wolfiewhite
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Floral_clock_at_Parliament_of_Malaysia_(Landscape).jpg
+- **License:** Creative Commons Zero, Public Domain Dedication
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Wolfiewhite".
+
+### 34. `story-2026-09-13-india-pakistan.jpg`
+- **Story:** India-Pakistan water row deepens after Hague court ruling (South China Morning Post)
+- **Subject:** International Court of Justice HQ 2006
+- **Photographer / creator:** International Court of Justice; originally uploaded by Yeu Ninje at en.wikipedia.
+- **Original file page:** https://commons.wikimedia.org/wiki/File:International_Court_of_Justice_HQ_2006.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "International Court of Justice; originally uploaded by Yeu Ninje at en.wikipedia.".
+
+### 35. `story-2026-09-12-china-threatens.jpg`
+- **Story:** China threatens to cancel summit if US approves new arms sales to Taiwan (The Straits Times)
+- **Subject:** Taipei Taiwan Presidential-Office-Building-01
+- **Photographer / creator:** CEphoto, Uwe Aranas
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Presidential-Office-Building-01.jpg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "CEphoto, Uwe Aranas / Wikimedia Commons / CC BY-SA 3.0"
+
+### 36. `story-2026-09-11-iea-warns.jpg`
+- **Story:** IEA warns 2026 oil supply gap will widen on delayed return of normal Gulf flows (Channel News Asia)
+- **Subject:** Unmooring and departure of the Oil & Chemical Tanker Gulf Muttrah from BP Oil Refinery Jetty, Kwinana, October 2021 24
+- **Photographer / creator:** Calistemon
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Unmooring_and_departure_of_the_Oil_%26_Chemical_Tanker_Gulf_Muttrah_from_BP_Oil_Refinery_Jetty,_Kwinana,_October_2021_24.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Calistemon / Wikimedia Commons / CC BY-SA 4.0"
+
+---
