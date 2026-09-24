@@ -333,3 +333,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** "Calistemon / Wikimedia Commons / CC BY-SA 4.0"
 
 ---
+
+## September 23, 2026 – September 24, 2026 edition (2026-09-25)
+
+### 37. `story-2026-09-23-trump-xi.jpg`
+- **Story:** Trump-Xi summit: Leaders meet at White House amid tensions over Taiwan, trade and AI (NBC News)
+- **Subject:** Exterior of the White House West wing 001
+- **Photographer / creator:** Geraldshields11
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Exterior_of_the_White_House_West_wing_001.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Geraldshields11 / Wikimedia Commons / CC BY-SA 4.0"
+
+### 38. `story-2026-09-24-ethiopia-and.jpg`
+- **Story:** Ethiopia and Tigray on verge of return to full-scale war: NPR (NPR)
+- **Subject:** Addis Ababa skyline
+- **Photographer / creator:** Simfan34
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Addis_Ababa_skyline.jpg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "Simfan34 / Wikimedia Commons / CC BY-SA 3.0"
+
+### 39. `story-2026-09-24-why-did.jpg`
+- **Story:** Why did an OpenAI system hack Australia health system-and can it be stopped in the future? (BBC)
+- **Subject:** PDC server room
+- **Photographer / creator:** Esquilo
+- **Original file page:** https://commons.wikimedia.org/wiki/File:PDC_server_room.jpg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "Esquilo / Wikimedia Commons / CC BY-SA 3.0"
+
+### 40. `story-2026-09-24-doj-says.jpg`
+- **Story:** DOJ says it's moving to end more than 50 decades-old school desegregation cases (CBS News)
+- **Subject:** US Marshals with Young Ruby Bridges on School Steps
+- **Photographer / creator:** Uncredited DOJ photographer, restored by Adam Cuerden (a relatively minor restoration)
+- **Original file page:** https://commons.wikimedia.org/wiki/File:US_Marshals_with_Young_Ruby_Bridges_on_School_Steps.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Uncredited DOJ photographer, restored by Adam Cuerden (a relatively minor restoration)".
+
+### 41. `story-2026-09-23-sri-lankan.jpg`
+- **Story:** Sri Lankan court sentences 15 men to life in prison for roles in deadly 2019 Easter bombings (NBC News)
+- **Type:** AI-generated editorial illustration (not a real photograph)
+- **Generated:** 2026-09-24T23:55:08.031Z
+- **Model:** gpt-image-1
+- **Purpose:** Generated because no suitable licensed real/contextual photograph was available for: "Sri Lankan court sentences 15 men to life in prison for roles in deadly 2019 Easter bombings". Sensitive-story safeguards applied: abstract/symbolic contextual imagery only, no depiction of violence, injury, or attack.
+- **Alt text:** AI-generated editorial illustration for this Asia Pickup story — not a photograph of the actual event.
+
+### 42. `story-2026-09-23-haze-choked.jpg`
+- **Story:** Haze-choked Indonesia records more than 170,000 respiratory cases (BBC)
+- **Subject:** Sunset during Jambi haze, August 2026
+- **Photographer / creator:** Muhamad Izzul Fiqih
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Sunset_during_Jambi_haze,_August_2026.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Muhamad Izzul Fiqih / Wikimedia Commons / CC BY-SA 4.0"
+
+---
