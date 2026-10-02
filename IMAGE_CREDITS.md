@@ -385,3 +385,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** "Muhamad Izzul Fiqih / Wikimedia Commons / CC BY-SA 4.0"
 
 ---
+
+## September 29, 2026 – October 1, 2026 edition (2026-10-02)
+
+### 43. `story-2026-10-01-supreme-court.jpg`
+- **Story:** Supreme court to hear case challenging Trump immigration detention policy | US immigration (The Guardian)
+- **Subject:** Panorama of United States Supreme Court Building at Dusk
+- **Photographer / creator:** Joe Ravi
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Panorama_of_United_States_Supreme_Court_Building_at_Dusk.jpg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "Joe Ravi / Wikimedia Commons / CC BY-SA 3.0"
+
+### 44. `story-2026-10-01-gas-vehicles.png`
+- **Story:** Gas vehicles fall under 50% of global new-auto sales for first time (Nikkei Asia)
+- **Subject:** Electric car sales share in the Stated Policies Scenario, 2030
+- **Photographer / creator:** International Energy Agency
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Electric_car_sales_share_in_the_Stated_Policies_Scenario,_2030.png
+- **License:** Creative Commons Attribution 4.0
+- **Attribution wording required:** "International Energy Agency / Wikimedia Commons / CC BY 4.0"
+
+### 45. `story-2026-09-30-japan-court.jpg`
+- **Story:** Japan court rules voice is protected as publicity right in AI cloning case (Nikkei Asia)
+- **Subject:** 2023 Dyktafon Olympus VN-541PC
+- **Photographer / creator:** Jacek Halicki
+- **Original file page:** https://commons.wikimedia.org/wiki/File:2023_Dyktafon_Olympus_VN-541PC.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Jacek Halicki / Wikimedia Commons / CC BY-SA 4.0"
+
+### 46. `story-2026-09-30-taiwan-taps.png`
+- **Story:** Taiwan taps US tech for sea drones to fend off China vast maritime fleet (Nikkei Asia)
+- **Subject:** Task force 59 USV
+- **Photographer / creator:** Photo by Specialist Natianna Strachen
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Task_force_59_USV.png
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Photo by Specialist Natianna Strachen".
+
+### 47. `story-2026-09-29-malaysia-begins.jpg`
+- **Story:** Malaysia begins sending home Myanmar refugees despite safety concerns (Nikkei Asia)
+- **Subject:** Rohingya Refugee Camp 26
+- **Photographer / creator:** Rocky Masum
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Rohingya_Refugee_Camp_26.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Rocky Masum / Wikimedia Commons / CC BY-SA 4.0"
+
+### 48. `story-2026-10-01-swiss-glaciers.jpg`
+- **Story:** Swiss glaciers lose more than 5% of ice after record heatwave (Channel News Asia)
+- **Subject:** Aletschgletscher-Eggishorn
+- **Photographer / creator:** Tobias Alt, Tobi 87
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Aletschgletscher-Eggishorn.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Tobias Alt, Tobi 87 / Wikimedia Commons / CC BY-SA 4.0"
+
+---
