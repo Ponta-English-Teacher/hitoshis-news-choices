@@ -437,3 +437,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** "Tobias Alt, Tobi 87 / Wikimedia Commons / CC BY-SA 4.0"
 
 ---
+
+## October 2, 2026 edition (2026-10-09)
+
+### 49. `story-2026-10-02-us-sends.jpg`
+- **Story:** US sends third aircraft carrier to Middle East amid stalemate in Iran war (The Guardian)
+- **Subject:** An F-A-18C Hornet launches from the flight deck of the conventionally powered aircraft carrier
+- **Photographer / creator:** U.S. Navy photo by Photographer's Mate 3rd Class Jonathan Chandler
+- **Original file page:** https://commons.wikimedia.org/wiki/File:An_F-A-18C_Hornet_launches_from_the_flight_deck_of_the_conventionally_powered_aircraft_carrier.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "U.S. Navy photo by Photographer's Mate 3rd Class Jonathan Chandler".
+
+### 50. `story-2026-10-02-how-the.jpg`
+- **Story:** How the fighting in Ethiopia spread beyond Tigray, in maps and charts (Al Jazeera English)
+- **Subject:** Administrative map of Tigray
+- **Photographer / creator:** Sofie Annys
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Administrative_map_of_Tigray.jpg
+- **License:** Creative Commons Attribution 4.0
+- **Attribution wording required:** "Sofie Annys / Wikimedia Commons / CC BY 4.0"
+
+### 51. `story-2026-10-02-miami-judge.jpg`
+- **Story:** Miami judge rules federal noncitizen voting law violates US Constitution (Al Jazeera English)
+- **Subject:** Courtroom, Hannibal Federal Building and U.S. Courthouse (2013)
+- **Photographer / creator:** United States District Court for the Eastern District of Missouri
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Courtroom,_Hannibal_Federal_Building_and_U.S._Courthouse_(2013).jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "United States District Court for the Eastern District of Missouri".
+
+### 52. `story-2026-10-02-greece-pushes.jpg`
+- **Story:** Greece pushes EU to suspend asylum during mass migration surges (Al Jazeera English)
+- **Subject:** 20151029 5boats with refugees arriving to Skala Sykamias Lesvos Greece
+- **Photographer / creator:** Ggia
+- **Original file page:** https://commons.wikimedia.org/wiki/File:20151029_5boats_with_refugees_arriving_to_Skala_Sykamias_Lesvos_Greece.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Ggia / Wikimedia Commons / CC BY-SA 4.0"
+
+### 53. `story-2026-10-02-tokyo-core.jpg`
+- **Story:** Tokyo core inflation rate jumps, bolsters case for more BOJ hikes (Nikkei Asia)
+- **Subject:** Bank of Japan headquarters in Tokyo, Japan
+- **Photographer / creator:** Unknown
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Bank_of_Japan_headquarters_in_Tokyo,_Japan.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Unknown".
+
+### 54. `story-2026-10-02-el-nino.jpg`
+- **Story:** El Nino dries Kalimantan rivers, hits coal shipments in Indonesia (Nikkei Asia)
+- **Subject:** Banks of Martapura River, South Kalimantan, 2018-07-28 01
+- **Photographer / creator:** Crisco 1492
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Banks_of_Martapura_River,_South_Kalimantan,_2018-07-28_01.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Crisco 1492 / Wikimedia Commons / CC BY-SA 4.0"
+
+---
