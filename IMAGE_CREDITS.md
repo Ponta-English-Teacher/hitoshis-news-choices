@@ -489,3 +489,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** "Crisco 1492 / Wikimedia Commons / CC BY-SA 4.0"
 
 ---
+
+## October 15, 2026 edition (2026-10-16)
+
+### 55. `story-2026-10-15-white-house.jpg`
+- **Story:** White House prepares plans to use weapon dubbed mother of all bombs on Iran, sources say (CBS News)
+- **Subject:** MOAB bomb
+- **Photographer / creator:** U.S. Department of Defense photograph
+- **Original file page:** https://commons.wikimedia.org/wiki/File:MOAB_bomb.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "U.S. Department of Defense photograph".
+
+### 56. `story-2026-10-15-eight-crew.jpg`
+- **Story:** Eight crew missing after drone attack leaves tanker ablaze off Romania coast (BBC)
+- **Subject:** Brand op tanker Diana bij Mobil Oil de brand, Bestanddeelnr 921-9354
+- **Photographer / creator:** Ron Kroon / Anefo
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Brand_op_tanker_Diana_bij_Mobil_Oil_de_brand,_Bestanddeelnr_921-9354.jpg
+- **License:** Creative Commons Zero, Public Domain Dedication
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Ron Kroon / Anefo".
+
+### 57. `story-2026-10-15-justice-department.jpg`
+- **Story:** Justice Department sues California, claiming it mailing ballots to more than 20,000 noncitizens (CBS News)
+- **Subject:** US Department of Justice building with road
+- **Photographer / creator:** VOA
+- **Original file page:** https://commons.wikimedia.org/wiki/File:US_Department_of_Justice_building_with_road.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "VOA".
+
+### 58. `story-2026-10-15-ftc-issues.jpg`
+- **Story:** FTC issues subpoenas to Anthropic and OpenAI over safety incidents (CBS News)
+- **Type:** AI-generated editorial illustration (not a real photograph)
+- **Generated:** 2026-10-15T23:43:15.462Z
+- **Model:** gpt-image-1
+- **Purpose:** Generated because no suitable licensed real/contextual photograph was available for: "FTC issues subpoenas to Anthropic and OpenAI over safety incidents". Standard contextual editorial imagery guidance applied for this category.
+- **Alt text:** AI-generated editorial illustration for this Technology & AI story — not a photograph of the actual event.
+
+### 59. `story-2026-10-15-emerging-market.jpg`
+- **Story:** Emerging market job shortage a ticking time bomb: UN development chief (Nikkei Asia)
+- **Subject:** Construction workers in Mexico
+- **Photographer / creator:** Tomascastelazo
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Construction_workers_in_Mexico.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Tomascastelazo / Wikimedia Commons / CC BY-SA 4.0"
+
+### 60. `story-2026-10-15-north-korea.jpg`
+- **Story:** North Korea pact with Russia built to outlast Ukraine war (Nikkei Asia)
+- **Subject:** 2011 Russian Embassy in DPRK
+- **Photographer / creator:** Lazyhawk
+- **Original file page:** https://commons.wikimedia.org/wiki/File:2011_Russian_Embassy_in_DPRK.jpg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "Lazyhawk / Wikimedia Commons / CC BY-SA 3.0"
+
+---
