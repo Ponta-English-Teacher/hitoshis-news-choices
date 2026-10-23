@@ -541,3 +541,55 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Attribution wording required:** "Lazyhawk / Wikimedia Commons / CC BY-SA 3.0"
 
 ---
+
+## October 21, 2026 – October 22, 2026 edition (2026-10-23)
+
+### 61. `story-2026-10-22-supreme-court.jpg`
+- **Story:** Supreme Court says New Hampshire student IDs can't be used to vote in November (NBC News)
+- **Subject:** New Hampshire State House, Concord, NH (2004)
+- **Photographer / creator:** Ken Lund from Reno, Nevada, USA
+- **Original file page:** https://commons.wikimedia.org/wiki/File:New_Hampshire_State_House,_Concord,_NH_(2004).jpg
+- **License:** Creative Commons Attribution-Share Alike 2.0
+- **Attribution wording required:** "Ken Lund from Reno, Nevada, USA / Wikimedia Commons / CC BY-SA 2.0"
+
+### 62. `story-2026-10-22-iran-says.jpg`
+- **Story:** Iran says 7 oil tankers attacked in the Strait of Hormuz as fears grow of a return to war (NBC News)
+- **Subject:** STS004-37-716 - Strait of Hormuz
+- **Photographer / creator:** NASA
+- **Original file page:** https://commons.wikimedia.org/wiki/File:STS004-37-716_-_Strait_of_Hormuz.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "NASA".
+
+### 63. `story-2026-10-21-meta-ordered.jpg`
+- **Story:** Meta ordered to pay $25 billion to New Mexico after jury finds company misled consumers about data privacy (NBC News)
+- **Subject:** Meta Platforms Headquarters Menlo Park California
+- **Photographer / creator:** LPS.1
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Meta_Platforms_Headquarters_Menlo_Park_California.jpg
+- **License:** Creative Commons Zero, Public Domain Dedication
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "LPS.1".
+
+### 64. `story-2026-10-22-nasdaq-dives.jpg`
+- **Story:** Nasdaq dives more than 750 points as investors worry massive AI spending won't pay off (CBS News)
+- **Subject:** Facebook on Nasdaq
+- **Photographer / creator:** ProducerMatthew
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Facebook_on_Nasdaq.jpeg
+- **License:** Creative Commons Attribution-Share Alike 3.0
+- **Attribution wording required:** "ProducerMatthew / Wikimedia Commons / CC BY-SA 3.0"
+
+### 65. `story-2026-10-22-96-of.jpg`
+- **Story:** 96% of world coral reefs face critical risk of collapse (DW)
+- **Subject:** Bleached Staghorn Coral
+- **Photographer / creator:** Matt Kieffer
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Bleached_Staghorn_Coral.jpg
+- **License:** Creative Commons Attribution-Share Alike 2.0
+- **Attribution wording required:** "Matt Kieffer / Wikimedia Commons / CC BY-SA 2.0"
+
+### 66. `story-2026-10-21-small-base.jpg`
+- **Story:** Small base, long shadow: China's new military outpost in Laos (The Straits Times)
+- **Subject:** 2021-12-03 China-Laos-Eisenbahn
+- **Photographer / creator:** Embassy of Timor-Leste in Vientiane
+- **Original file page:** https://commons.wikimedia.org/wiki/File:2021-12-03_China-Laos-Eisenbahn.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Embassy of Timor-Leste in Vientiane".
+
+---

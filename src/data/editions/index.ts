@@ -1,4 +1,5 @@
 import type { NewsStory } from "@/types/news-story";
+import { stories as stories_2026_10_23 } from "./2026-10-23";
 import { stories as stories_2026_10_16 } from "./2026-10-16";
 import { stories as stories_2026_10_09 } from "./2026-10-09";
 import { stories as stories_2026_10_02 } from "./2026-10-02";
@@ -25,6 +26,7 @@ export interface EditionMeta {
  * this directory.
  */
 export const editions: EditionMeta[] = [
+  { date: "2026-10-23", dateRangeLabel: "October 21, 2026 – October 22, 2026", stories: stories_2026_10_23 },
   { date: "2026-10-16", dateRangeLabel: "October 15, 2026", stories: stories_2026_10_16 },
   { date: "2026-10-09", dateRangeLabel: "October 2, 2026", stories: stories_2026_10_09 },
   { date: "2026-10-02", dateRangeLabel: "September 29, 2026 – October 1, 2026", stories: stories_2026_10_02 },
