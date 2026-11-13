@@ -1,4 +1,5 @@
 import type { NewsStory } from "@/types/news-story";
+import { stories as stories_2026_11_13 } from "./2026-11-13";
 import { stories as stories_2026_10_30 } from "./2026-10-30";
 import { stories as stories_2026_10_23 } from "./2026-10-23";
 import { stories as stories_2026_10_16 } from "./2026-10-16";
@@ -6,8 +7,6 @@ import { stories as stories_2026_10_09 } from "./2026-10-09";
 import { stories as stories_2026_10_02 } from "./2026-10-02";
 import { stories as stories_2026_09_25 } from "./2026-09-25";
 import { stories as stories_2026_09_18 } from "./2026-09-18";
-import { stories as stories_2026_09_11 } from "./2026-09-11";
-import { stories as stories_2026_09_04 } from "./2026-09-04";
 
 export interface EditionMeta {
   /** Canonical key, also the /editions/[date] URL segment. */
@@ -25,6 +24,7 @@ export interface EditionMeta {
  * this directory.
  */
 export const editions: EditionMeta[] = [
+  { date: "2026-11-13", dateRangeLabel: "November 8, 2026 – November 12, 2026", stories: stories_2026_11_13 },
   { date: "2026-10-30", dateRangeLabel: "October 24, 2026 – October 27, 2026", stories: stories_2026_10_30 },
   { date: "2026-10-23", dateRangeLabel: "October 21, 2026 – October 22, 2026", stories: stories_2026_10_23 },
   { date: "2026-10-16", dateRangeLabel: "October 15, 2026", stories: stories_2026_10_16 },
@@ -32,8 +32,6 @@ export const editions: EditionMeta[] = [
   { date: "2026-10-02", dateRangeLabel: "September 29, 2026 – October 1, 2026", stories: stories_2026_10_02 },
   { date: "2026-09-25", dateRangeLabel: "September 23, 2026 – September 24, 2026", stories: stories_2026_09_25 },
   { date: "2026-09-18", dateRangeLabel: "September 11, 2026 – September 13, 2026", stories: stories_2026_09_18 },
-  { date: "2026-09-11", dateRangeLabel: "September 9, 2026 – September 10, 2026", stories: stories_2026_09_11 },
-  { date: "2026-09-04", dateRangeLabel: "August 31, 2026 – September 2, 2026", stories: stories_2026_09_04 },
 ];
 
 export const latestEdition = editions[0];

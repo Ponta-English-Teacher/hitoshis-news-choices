@@ -66,60 +66,6 @@ Each image was chosen for topical relevance to its story and license-verified vi
 
 Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority order (real event image → real contextual image → AI-generated illustration → placeholder), license-verified via the Wikimedia Commons API (`imageinfo`/`extmetadata`) before download. None depict the exact 2026 event described in their story — no freely reusable actual-event photograph existed for any of these six current-week stories at sourcing time — so all six are `licensed-contextual`. This is reflected honestly in each story's `imageAlt` text in `src/data/editions/2026-09-04.ts`.
 
-### 13. `iran-strait-us-navy-patrol.jpg`
-- **Story:** US launches strikes on Iran following attempted attacks in Strait (BBC)
-- **Commons filename:** `File:USS Tempest (PC 2) transits the Strait of Hormuz. (50679762106).jpg`
-- **Subject:** The U.S. Navy coastal patrol ship USS Tempest transiting the Strait of Hormuz (contextual — a December 2020 file photo, not a photo of the 2026 strikes)
-- **Photographer / creator:** U.S. Navy photo by Mass Communication Specialist 2nd Class Indra Beaufort
-- **Original file page:** https://commons.wikimedia.org/wiki/File:USS_Tempest_(PC_2)_transits_the_Strait_of_Hormuz._(50679762106).jpg
-- **License:** Public Domain (U.S. federal government work)
-- **Attribution wording required:** None (public domain). Credited here as a courtesy: "U.S. Navy photo by Indra Beaufort".
-
-### 14. `pyongyang-kim-il-sung-square.jpg`
-- **Story:** North Korea next ruler? Kim Jong-un daughter, Seoul spies say (South China Morning Post)
-- **Commons filename:** `File:Kim Il Sung Square, Pyongyang, North Korea.jpg`
-- **Subject:** Kim Il-sung Square, Pyongyang — the ceremonial center of North Korea's political leadership (contextual — deliberately NOT a photograph of Kim Jong-un's daughter, since no freely reusable image of her exists; a copyrighted press photo was not used, per IMAGE_POLICY.md and the quality bar for this story)
-- **Photographer / creator:** Kok Leng Yeo
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Kim_Il_Sung_Square,_Pyongyang,_North_Korea.jpg
-- **License:** CC BY 2.0 (Creative Commons Attribution 2.0 Generic)
-- **Attribution wording required:** "Kok Leng Yeo / Wikimedia Commons / CC BY 2.0"
-
-### 15. `climate-drought-cracked-earth.jpg`
-- **Story:** Global heating will hit at least 1.8C, UN warns, and there are no good outcome | Climate crisis (The Guardian)
-- **Commons filename:** `File:Drought in Morocco.jpg`
-- **Subject:** Cracked, drought-stricken earth in Morocco (contextual — illustrates the extreme heat/water stress linked to global heating described in the story, not a photo tied to the specific UN report)
-- **Photographer / creator:** Houssain tork
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Drought_in_Morocco.jpg
-- **License:** CC BY-SA 4.0 (Creative Commons Attribution-Share Alike 4.0)
-- **Attribution wording required:** "Houssain tork / Wikimedia Commons / CC BY-SA 4.0"
-
-### 16. `pentagon-building-aerial.jpg`
-- **Story:** Dan Driscoll: US Army secretary resigns after months of tension (BBC)
-- **Commons filename:** `File:The Pentagon US Department of Defense building.jpg`
-- **Subject:** Aerial view of the Pentagon, headquarters of the U.S. Department of Defense (contextual — a 1998 file photo, not a photo of Dan Driscoll; no freely reusable photo of Driscoll was found, so a relevant U.S. Army/Pentagon contextual image was used instead of a questionable press photo, per the quality bar for this story)
-- **Photographer / creator:** DoD photo by Master Sgt. Ken Hammond, U.S. Air Force
-- **Original file page:** https://commons.wikimedia.org/wiki/File:The_Pentagon_US_Department_of_Defense_building.jpg
-- **License:** Public Domain (U.S. federal government work)
-- **Attribution wording required:** None (public domain). Credited here as a courtesy: "DoD photo by Ken Hammond".
-
-### 17. `ai-cloud-datacenter-racks.jpg`
-- **Story:** Anthropic signs US$35 billion cloud deal with Nvidia-backed Lambda, source says (Channel News Asia)
-- **Commons filename:** `File:Datacenter Server Racks (22370909788).jpg`
-- **Subject:** Rows of server racks inside a data center (contextual — genuinely relevant to the cloud/AI-infrastructure subject matter of the story, chosen instead of a generic robot illustration per the quality bar for this story)
-- **Photographer / creator:** Carl Lender
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Datacenter_Server_Racks_(22370909788).jpg
-- **License:** CC BY 2.0 (Creative Commons Attribution 2.0 Generic)
-- **Attribution wording required:** "Carl Lender / Wikimedia Commons / CC BY 2.0"
-
-### 18. `germany-drone-quadcopter.jpg`
-- **Story:** Germany blames Russia for airport drone plot, shuts down consulate (NBC News)
-- **Commons filename:** `File:DJI Phantom 4Pro 04-2017 img3 in flight.jpg`
-- **Subject:** A consumer quadcopter drone in flight, photographed in Berlin, Germany (contextual — genuinely relevant to both the "drone" and "Germany" elements of the story, chosen over generic war imagery per the quality bar for this story)
-- **Photographer / creator:** A.Savin
-- **Original file page:** https://commons.wikimedia.org/wiki/File:DJI_Phantom_4Pro_04-2017_img3_in_flight.jpg
-- **License:** Free Art License (FAL)
-- **Attribution wording required:** "A.Savin, Wikipedia"
-
 ---
 
 **Note on images 13-18:** Downloaded via Wikimedia's `Special:FilePath` redirect at reduced width (1200px). Two (13, 16) are Public Domain U.S. federal government works requiring no attribution (credited here as a courtesy); two (14, 17) are CC BY 2.0, requiring attribution only; one (15) is CC BY-SA 4.0, requiring attribution and ShareAlike redistribution; one (18) is under the Free Art License, requiring attribution as specified on its file page.
@@ -129,54 +75,6 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 ---
 
 ## September 9, 2026 – September 10, 2026 edition (2026-09-11)
-
-### 25. `story-2026-09-10-yemen-houthis.jpg`
-- **Story:** Yemen Houthis seize port city Mocha, closing in on control of Bab el-Mandeb Strait (South China Morning Post)
-- **Subject:** Bab-el-Mandeb Strait, Africa-Arabia (ASTER)
-- **Photographer / creator:** NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Bab-el-Mandeb_Strait,_Africa-Arabia_(ASTER).jpg
-- **License:** Public domain
-- **Attribution wording required:** None (public domain). Credited here as a courtesy: "NASA/METI/AIST/Japan Space Systems, and U.S./Japan ASTER Science Team".
-
-### 26. `story-2026-09-10-supreme-court.jpg`
-- **Story:** Supreme Court blocks Missouri attempt to use newly drawn Republican congressional map (NBC News)
-- **Subject:** US Supreme Court - corrected
-- **Photographer / creator:** Jarek Tuszyński
-- **Original file page:** https://commons.wikimedia.org/wiki/File:US_Supreme_Court_-_corrected.jpg
-- **License:** Creative Commons Attribution-Share Alike 3.0
-- **Attribution wording required:** "Jarek Tuszyński / Wikimedia Commons / CC BY-SA 3.0"
-
-### 27. `story-2026-09-10-anthropic-state.jpg`
-- **Story:** Anthropic: state-linked scientists from banned regions used Claude for virus research (NBC News)
-- **Subject:** V20230504LJ-0199-2
-- **Photographer / creator:** The White House
-- **Original file page:** https://commons.wikimedia.org/wiki/File:V20230504LJ-0199-2.jpg
-- **License:** Public domain
-- **Attribution wording required:** None (public domain). Credited here as a courtesy: "The White House".
-
-### 28. `story-2026-09-10-suspected-measles.jpg`
-- **Story:** Suspected measles cases kill nearly 1,000 as Bangladesh struggles to contain outbreak (NBC News)
-- **Subject:** Infectious Diseases Hospital, Rajshahi 18
-- **Photographer / creator:** Nahid Hossain
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Infectious_Diseases_Hospital,_Rajshahi_18.jpg
-- **License:** Creative Commons Attribution-Share Alike 4.0
-- **Attribution wording required:** "Nahid Hossain / Wikimedia Commons / CC BY-SA 4.0"
-
-### 29. `story-2026-09-09-trump-hits.jpg`
-- **Story:** Trump hits Canada with import bans, 50% tariffs (DW)
-- **Subject:** Wild Horse Border Crossing
-- **Photographer / creator:** Qwexcxewq
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Wild_Horse_Border_Crossing.jpg
-- **License:** Creative Commons Attribution 4.0
-- **Attribution wording required:** "Qwexcxewq / Wikimedia Commons / CC BY 4.0"
-
-### 30. `story-2026-09-10-global-heat.jpg`
-- **Story:** Global heat stuck on high: August was Earth hottest month on record, scientists say (NBC News)
-- **Subject:** Weather Station USDA
-- **Photographer / creator:** USDA photo by Scott Bauer. Image Number K7688-7
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Weather_Station_USDA.jpg
-- **License:** Public domain
-- **Attribution wording required:** None (public domain). Credited here as a courtesy: "USDA photo by Scott Bauer. Image Number K7688-7".
 
 ---
 
@@ -541,5 +439,57 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Original file page:** https://commons.wikimedia.org/wiki/File:China_India_CIA_map_border_disputes.jpg
 - **License:** Public domain
 - **Attribution wording required:** None (public domain). Credited here as a courtesy: "United States. Central Intelligence Agency.".
+
+---
+
+## November 8, 2026 – November 12, 2026 edition (2026-11-13)
+
+### 73. `story-2026-11-12-democrat-scott.jpg`
+- **Story:** Democrat Scott Colom wins Mississippi 2026 Senate race, flipping seat in upset (CBS News)
+- **Subject:** Jackson December 2018 02 (Mississippi State Capitol) (cropped)
+- **Photographer / creator:** Michael Barera
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Jackson_December_2018_02_(Mississippi_State_Capitol)_(cropped).jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Michael Barera / Wikimedia Commons / CC BY-SA 4.0"
+
+### 74. `story-2026-11-10-ukraine-peace.jpg`
+- **Story:** Ukraine peace talks resume in Abu Dhabi after months-long pause (BBC)
+- **Subject:** Embassy of Ukraine in Sweden
+- **Photographer / creator:** Irina Butiaha - Ірина Бутяга
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Embassy_of_Ukraine_in_Sweden.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Irina Butiaha - Ірина Бутяга".
+
+### 75. `story-2026-11-09-aramco-tower.jpg`
+- **Story:** Aramco Tower hit in heart of Saudi capital as Houthis launch fresh strikes (BBC)
+- **Subject:** Riyadh Skyline showing the King Abdullah Financial District (KAFD) and the famous Kingdom Tower 
+- **Photographer / creator:** B.alotaby
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Riyadh_Skyline_showing_the_King_Abdullah_Financial_District_(KAFD)_and_the_famous_Kingdom_Tower_.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "B.alotaby / Wikimedia Commons / CC BY-SA 4.0"
+
+### 76. `story-2026-11-12-nvidia-board.jpg`
+- **Story:** Nvidia board meets to decide CEO Huang future as leadership crisis deepens (Channel News Asia)
+- **Subject:** Director Lê Nguyễn Thiên Nga and NVIDIA Founder and CEO Jensen Huang
+- **Photographer / creator:** VQTCS
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Director_L%C3%AA_Nguy%E1%BB%85n_Thi%C3%AAn_Nga_and_NVIDIA_Founder_and_CEO_Jensen_Huang.jpg
+- **License:** Creative Commons Attribution 4.0
+- **Attribution wording required:** "VQTCS / Wikimedia Commons / CC BY 4.0"
+
+### 77. `story-2026-11-11-how-hacking.jpg`
+- **Story:** How hacking became a key weapon for sanctions-hit North Korea (Channel News Asia)
+- **Subject:** Hackers working on Linux laptop with computer disks and repair kits - Milano 2022
+- **Photographer / creator:** User:Kowalski7cc
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Hackers_working_on_Linux_laptop_with_computer_disks_and_repair_kits_-_Milano_2022.jpg
+- **License:** Creative Commons Zero, Public Domain Dedication
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "User:Kowalski7cc".
+
+### 78. `story-2026-11-08-south-africa.jpg`
+- **Story:** South Africa ANC records worst-ever results in local elections (BBC)
+- **Subject:** Sea Point ANC office Annelize van Wyk MP
+- **Photographer / creator:** Kaihsu Tai
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Sea_Point_ANC_office_Annelize_van_Wyk_MP.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Kaihsu Tai".
 
 ---
