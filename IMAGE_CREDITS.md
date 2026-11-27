@@ -84,54 +84,6 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 
 ## September 23, 2026 – September 24, 2026 edition (2026-09-25)
 
-### 37. `story-2026-09-23-trump-xi.jpg`
-- **Story:** Trump-Xi summit: Leaders meet at White House amid tensions over Taiwan, trade and AI (NBC News)
-- **Subject:** Exterior of the White House West wing 001
-- **Photographer / creator:** Geraldshields11
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Exterior_of_the_White_House_West_wing_001.jpg
-- **License:** Creative Commons Attribution-Share Alike 4.0
-- **Attribution wording required:** "Geraldshields11 / Wikimedia Commons / CC BY-SA 4.0"
-
-### 38. `story-2026-09-24-ethiopia-and.jpg`
-- **Story:** Ethiopia and Tigray on verge of return to full-scale war: NPR (NPR)
-- **Subject:** Addis Ababa skyline
-- **Photographer / creator:** Simfan34
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Addis_Ababa_skyline.jpg
-- **License:** Creative Commons Attribution-Share Alike 3.0
-- **Attribution wording required:** "Simfan34 / Wikimedia Commons / CC BY-SA 3.0"
-
-### 39. `story-2026-09-24-why-did.jpg`
-- **Story:** Why did an OpenAI system hack Australia health system-and can it be stopped in the future? (BBC)
-- **Subject:** PDC server room
-- **Photographer / creator:** Esquilo
-- **Original file page:** https://commons.wikimedia.org/wiki/File:PDC_server_room.jpg
-- **License:** Creative Commons Attribution-Share Alike 3.0
-- **Attribution wording required:** "Esquilo / Wikimedia Commons / CC BY-SA 3.0"
-
-### 40. `story-2026-09-24-doj-says.jpg`
-- **Story:** DOJ says it's moving to end more than 50 decades-old school desegregation cases (CBS News)
-- **Subject:** US Marshals with Young Ruby Bridges on School Steps
-- **Photographer / creator:** Uncredited DOJ photographer, restored by Adam Cuerden (a relatively minor restoration)
-- **Original file page:** https://commons.wikimedia.org/wiki/File:US_Marshals_with_Young_Ruby_Bridges_on_School_Steps.jpg
-- **License:** Public domain
-- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Uncredited DOJ photographer, restored by Adam Cuerden (a relatively minor restoration)".
-
-### 41. `story-2026-09-23-sri-lankan.jpg`
-- **Story:** Sri Lankan court sentences 15 men to life in prison for roles in deadly 2019 Easter bombings (NBC News)
-- **Type:** AI-generated editorial illustration (not a real photograph)
-- **Generated:** 2026-09-24T23:55:08.031Z
-- **Model:** gpt-image-1
-- **Purpose:** Generated because no suitable licensed real/contextual photograph was available for: "Sri Lankan court sentences 15 men to life in prison for roles in deadly 2019 Easter bombings". Sensitive-story safeguards applied: abstract/symbolic contextual imagery only, no depiction of violence, injury, or attack.
-- **Alt text:** AI-generated editorial illustration for this Asia Pickup story — not a photograph of the actual event.
-
-### 42. `story-2026-09-23-haze-choked.jpg`
-- **Story:** Haze-choked Indonesia records more than 170,000 respiratory cases (BBC)
-- **Subject:** Sunset during Jambi haze, August 2026
-- **Photographer / creator:** Muhamad Izzul Fiqih
-- **Original file page:** https://commons.wikimedia.org/wiki/File:Sunset_during_Jambi_haze,_August_2026.jpg
-- **License:** Creative Commons Attribution-Share Alike 4.0
-- **Attribution wording required:** "Muhamad Izzul Fiqih / Wikimedia Commons / CC BY-SA 4.0"
-
 ---
 
 ## September 29, 2026 – October 1, 2026 edition (2026-10-02)
@@ -495,5 +447,57 @@ Each image was chosen for topical relevance per `IMAGE_POLICY.md`'s priority ord
 - **Original file page:** https://commons.wikimedia.org/wiki/File:Social_media_apps.jpg
 - **License:** Creative Commons Attribution-Share Alike 4.0
 - **Attribution wording required:** "Theresepersonne / Wikimedia Commons / CC BY-SA 4.0"
+
+---
+
+## November 24, 2026 – November 26, 2026 edition (2026-11-27)
+
+### 85. `story-2026-11-26-faulty-electrical.jpg`
+- **Story:** Faulty electrical goods returned to United Kingdom supermarkets ending up on Ghana megadump (The Guardian)
+- **Subject:** Agbogbloshie, Ghana - September 2019
+- **Photographer / creator:** Muntaka Chasant
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Agbogbloshie,_Ghana_-_September_2019.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Muntaka Chasant / Wikimedia Commons / CC BY-SA 4.0"
+
+### 86. `story-2026-11-26-judge-blocks.jpg`
+- **Story:** Judge blocks Brendan Carr-led FCC from taking any further action against ABC licenses (The Guardian)
+- **Subject:** FCC HQ
+- **Photographer / creator:** The original uploader was Ser Amantio di Nicolao at English Wikipedia.
+- **Original file page:** https://commons.wikimedia.org/wiki/File:FCC_HQ.jpg
+- **License:** Creative Commons Attribution 3.0
+- **Attribution wording required:** "The original uploader was Ser Amantio di Nicolao at English Wikipedia. / Wikimedia Commons / CC BY 3.0"
+
+### 87. `story-2026-11-25-australia-security.jpg`
+- **Story:** Australia security pact with Solomon Islands a blow to China influence in the Pacific (The Guardian)
+- **Subject:** Long shot of the Solomon Islands Parliament House. (10708895683)
+- **Photographer / creator:** Department of Foreign Affairs and Trade
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Long_shot_of_the_Solomon_Islands_Parliament_House._(10708895683).jpg
+- **License:** Creative Commons Attribution 2.0
+- **Attribution wording required:** "Department of Foreign Affairs and Trade / Wikimedia Commons / CC BY 2.0"
+
+### 88. `story-2026-11-25-inflation-rate.jpg`
+- **Story:** Inflation rate jumps to 4.9% as Australia cost-of-living crisis intensifies (The Guardian)
+- **Subject:** 2021-06-28 E-ink price tag in Sydney supermarket
+- **Photographer / creator:** Maksym Kozlenko
+- **Original file page:** https://commons.wikimedia.org/wiki/File:2021-06-28_E-ink_price_tag_in_Sydney_supermarket.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "Maksym Kozlenko / Wikimedia Commons / CC BY-SA 4.0"
+
+### 89. `story-2026-11-24-china-huawei.jpg`
+- **Story:** China Huawei convicted of deceiving banks about business in Iran and stealing US trade secrets (The Guardian)
+- **Subject:** Sidejo de Huawei en Ŝenĵeno 04
+- **Photographer / creator:** RG72
+- **Original file page:** https://commons.wikimedia.org/wiki/File:Sidejo_de_Huawei_en_%C5%9Cen%C4%B5eno_04.jpg
+- **License:** Creative Commons Attribution-Share Alike 4.0
+- **Attribution wording required:** "RG72 / Wikimedia Commons / CC BY-SA 4.0"
+
+### 90. `story-2026-11-24-us-defense.jpg`
+- **Story:** US defense chief has yet to approve Patriot missiles already allocated to Ukraine, FT reports (The Straits Times)
+- **Subject:** 210519-A-SO154-943 - Patriot Missile System operates in Croatia
+- **Photographer / creator:** Sgt. Alexandra Shea
+- **Original file page:** https://commons.wikimedia.org/wiki/File:210519-A-SO154-943_-_Patriot_Missile_System_operates_in_Croatia.jpg
+- **License:** Public domain
+- **Attribution wording required:** None (public domain). Credited here as a courtesy: "Sgt. Alexandra Shea".
 
 ---
